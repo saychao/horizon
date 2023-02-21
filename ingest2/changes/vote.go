@@ -1,8 +1,8 @@
 package changes
 
 import (
-	history "github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/generator"
+	history "github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/generator"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"

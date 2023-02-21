@@ -3,7 +3,7 @@ package txsub
 import (
 	"time"
 
-	"github.com/SafeRE-IT/horizon/corer"
+	"github.com/saychao/horizon/corer"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"golang.org/x/net/context"

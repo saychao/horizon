@@ -3,8 +3,8 @@ package ingest
 import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/pkg/errors"
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/db2/history"
 )
 
 // IntegrityCheck validates history database state and tries to fix known issues

@@ -3,7 +3,7 @@ package resource
 import (
 	"time"
 
-	"github.com/SafeRE-IT/horizon/ledger"
+	"github.com/saychao/horizon/ledger"
 	"gitlab.com/tokend/go/amount"
 	"golang.org/x/net/context"
 )

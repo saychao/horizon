@@ -3,7 +3,7 @@ package schema
 import (
 	"database/sql"
 	"errors"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 
 	migrate "github.com/rubenv/sql-migrate"
 )

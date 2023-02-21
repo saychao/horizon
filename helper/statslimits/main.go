@@ -2,7 +2,7 @@ package statslimits
 
 import (
 	"fmt"
-	"github.com/SafeRE-IT/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/core2"
 )
 
 func (statslimitsTable Table) CoreUnitsList() []core2.LimitsWithStats {

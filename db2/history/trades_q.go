@@ -2,7 +2,7 @@ package history
 
 import (
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 )
 
 type TradesQI interface {

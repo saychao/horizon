@@ -3,9 +3,9 @@ package horizon
 import (
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/errors"
-	"github.com/SafeRE-IT/horizon/render/problem"
 	gctx "github.com/goji/context"
+	"github.com/saychao/horizon/errors"
+	"github.com/saychao/horizon/render/problem"
 	"github.com/zenazn/goji/web"
 )
 

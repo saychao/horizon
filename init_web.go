@@ -8,13 +8,13 @@ import (
 
 	"gitlab.com/tokend/regources"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/log"
-	"github.com/SafeRE-IT/horizon/render"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
 	metrics "github.com/rcrowley/go-metrics"
 	"github.com/rs/cors"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/log"
+	"github.com/saychao/horizon/render"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
 	"github.com/zenazn/goji/web"
 	"github.com/zenazn/goji/web/middleware"
 	"gitlab.com/tokend/go/signcontrol"

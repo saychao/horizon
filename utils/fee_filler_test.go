@@ -4,8 +4,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/saychao/horizon/db2/core"
 	"github.com/stretchr/testify/require"
-	"github.com/SafeRE-IT/horizon/db2/core"
 )
 
 var Tests = []struct {

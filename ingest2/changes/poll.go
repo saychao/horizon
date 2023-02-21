@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/ingest2/storage"
+	"github.com/saychao/horizon/ingest2/storage"
 
 	regources "gitlab.com/tokend/regources/generated"
 
-	history "github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
+	history "github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/internal"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"

@@ -3,8 +3,8 @@ package resources
 import (
 	"fmt"
 
+	"github.com/saychao/horizon/db2/core2"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/core2"
 	regources "gitlab.com/tokend/regources/generated"
 )
 

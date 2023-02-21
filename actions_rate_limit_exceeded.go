@@ -5,7 +5,7 @@ import (
 
 	"github.com/zenazn/goji/web"
 
-	"github.com/SafeRE-IT/horizon/render/problem"
+	"github.com/saychao/horizon/render/problem"
 )
 
 // RateLimitExceededAction renders a 429 response

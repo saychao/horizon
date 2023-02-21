@@ -7,9 +7,9 @@ import (
 
 	"gitlab.com/distributed_lab/kit/copus/types"
 
-	"github.com/SafeRE-IT/horizon/log"
-	"github.com/SafeRE-IT/horizon/render/problem"
 	"github.com/pkg/errors"
+	"github.com/saychao/horizon/log"
+	"github.com/saychao/horizon/render/problem"
 	"github.com/throttled/throttled/v2"
 	"github.com/throttled/throttled/v2/store/memstore"
 	"github.com/zenazn/goji/web"

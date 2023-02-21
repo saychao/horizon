@@ -1,6 +1,6 @@
 package horizon
 
-import "github.com/SafeRE-IT/horizon/render/problem"
+import "github.com/saychao/horizon/render/problem"
 
 // NotImplementedAction renders a NotImplemented prblem
 type NotImplementedAction struct {

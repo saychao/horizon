@@ -1,12 +1,12 @@
 package ingest2
 
 import (
+	core "github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/generator"
+	"github.com/saychao/horizon/ingest2/internal"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/generator"
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
 )
 
 type matchesStorage interface {

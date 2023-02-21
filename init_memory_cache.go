@@ -1,7 +1,7 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/cache"
+	"github.com/saychao/horizon/cache"
 )
 
 func initMemoryCache(app *App) {

@@ -3,8 +3,8 @@ package fees
 import (
 	"testing"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
 	"github.com/magiconair/properties/assert"
+	"github.com/saychao/horizon/db2/core"
 )
 
 func TestFillFeeGaps(t *testing.T) {

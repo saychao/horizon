@@ -13,10 +13,10 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/SafeRE-IT/horizon/render"
-	"github.com/SafeRE-IT/horizon/render/jsonapi"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/render/sse"
+	"github.com/saychao/horizon/render"
+	"github.com/saychao/horizon/render/jsonapi"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/render/sse"
 	"github.com/zenazn/goji/web"
 	"golang.org/x/net/context"
 )

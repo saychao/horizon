@@ -1,7 +1,7 @@
 package resource
 
 import (
-	"github.com/SafeRE-IT/horizon/codes"
+	"github.com/saychao/horizon/codes"
 	"gitlab.com/tokend/go/xdr"
 )
 

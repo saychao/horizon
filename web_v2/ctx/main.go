@@ -4,13 +4,13 @@ import (
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/config"
+	"github.com/saychao/horizon/config"
 
-	"github.com/SafeRE-IT/horizon/txsub/v2"
+	"github.com/saychao/horizon/txsub/v2"
 
 	"context"
 
-	"github.com/SafeRE-IT/horizon/corer"
+	"github.com/saychao/horizon/corer"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/tokend/go/doorman"
 )

@@ -3,7 +3,7 @@ package resources
 import (
 	"fmt"
 
-	"github.com/SafeRE-IT/horizon/db2/history2"
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
 	regources "gitlab.com/tokend/regources/generated"

@@ -1,9 +1,9 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
 )
 
 // CoreSalesAction exists for non-obvious reasons and used by PSIM to close sales

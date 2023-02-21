@@ -7,10 +7,10 @@ import (
 	"golang.org/x/net/context"
 
 	gctx "github.com/goji/context"
+	"github.com/saychao/horizon/log"
 	"github.com/zenazn/goji/web"
 	"github.com/zenazn/goji/web/middleware"
 	"github.com/zenazn/goji/web/mutil"
-	"github.com/SafeRE-IT/horizon/log"
 )
 
 // LoggerMiddleware is the middleware that logs http requests and resposnes

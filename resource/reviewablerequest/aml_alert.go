@@ -1,7 +1,7 @@
 package reviewablerequest
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	amount2 "gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/regources"
 )

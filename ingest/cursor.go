@@ -5,8 +5,8 @@ import (
 
 	"database/sql"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/toid"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/toid"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
 )

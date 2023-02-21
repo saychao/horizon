@@ -2,11 +2,11 @@ package resource
 
 import (
 	"fmt"
-	"github.com/SafeRE-IT/horizon/httpx"
-	"github.com/SafeRE-IT/horizon/render/hal"
+	"github.com/saychao/horizon/httpx"
+	"github.com/saychao/horizon/render/hal"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/tokend/go/amount"
 	"golang.org/x/net/context"
 )

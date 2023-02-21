@@ -3,10 +3,10 @@ package changes
 import (
 	"time"
 
+	core "github.com/saychao/horizon/db2/core2"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
 )
 
 type creatable interface {
@@ -30,7 +30,7 @@ type Handler struct {
 	State  map[xdr.LedgerEntryType]statable
 }
 
-//NewHandler - returns new instance of handler
+// NewHandler - returns new instance of handler
 func NewHandler(account accountStorage,
 	balance balanceStorage,
 	request reviewableRequestStorage,
@@ -190,7 +190,7 @@ func (h *Handler) stated(lc ledgerChange) error {
 	return handler.Stated(lc)
 }
 
-//Name - name of the handler
+// Name - name of the handler
 func (h *Handler) Name() string {
 	return "ledger_changes_handler"
 }

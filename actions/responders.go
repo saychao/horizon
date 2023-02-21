@@ -1,6 +1,6 @@
 package actions
 
-import "github.com/SafeRE-IT/horizon/render/sse"
+import "github.com/saychao/horizon/render/sse"
 
 // JSON implementors can respond to a request whose response type was negotiated
 // to be MimeHal or MimeJSON.

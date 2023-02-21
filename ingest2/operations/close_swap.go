@@ -8,8 +8,8 @@ import (
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	regources "gitlab.com/tokend/regources/generated"
 
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 )
 
 type closeSwapOpHandler struct {

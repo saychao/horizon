@@ -2,10 +2,10 @@ package storage
 
 import (
 	sq "github.com/Masterminds/squirrel"
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 )
 
 // Vote is helper struct to operate with `votes`

@@ -3,7 +3,7 @@ package resources
 import (
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/db2/history2"
+	"github.com/saychao/horizon/db2/history2"
 	regources "gitlab.com/tokend/regources/generated"
 )
 

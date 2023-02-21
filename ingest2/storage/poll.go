@@ -3,7 +3,7 @@ package storage
 import (
 	"encoding/json"
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2/history2"
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"

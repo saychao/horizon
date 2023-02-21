@@ -1,11 +1,11 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/resource"
+	"github.com/saychao/horizon/db2"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/resource"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/regources"
 )

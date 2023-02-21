@@ -2,11 +2,11 @@ package history
 
 import (
 	"database/sql"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2/sqx"
+	"github.com/saychao/horizon/db2/sqx"
 	"gitlab.com/tokend/go/xdr"
 )
 

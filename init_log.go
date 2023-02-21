@@ -12,8 +12,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/config"
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/config"
+	"github.com/saychao/horizon/log"
 )
 
 const (

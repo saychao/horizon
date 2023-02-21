@@ -1,13 +1,13 @@
 package history
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
 	"fmt"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2/sqx"
+	"github.com/saychao/horizon/db2/sqx"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/go/xdr"
 )

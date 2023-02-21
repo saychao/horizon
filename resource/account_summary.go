@@ -3,7 +3,7 @@ package resource
 import (
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/tokend/go/amount"
 )
 

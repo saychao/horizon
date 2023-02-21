@@ -2,7 +2,7 @@ package history
 
 import (
 	"encoding/json"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 
 	"time"
 

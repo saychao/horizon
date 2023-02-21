@@ -1,24 +1,24 @@
 package ingest2
 
 import (
+	core "github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/generator"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/generator"
 )
 
 type ledgerChangesStorage interface {
 	Insert(ledgerChanges []history2.LedgerChanges) error
 }
 
-//LedgerChangesSaver - handles each ledger to store sequence of changes occurred for ledger entries
+// LedgerChangesSaver - handles each ledger to store sequence of changes occurred for ledger entries
 type LedgerChangesSaver struct {
 	storage ledgerChangesStorage
 }
 
-//NewLedgerChangesHandler - creates new instance of LedgerChangesSaver
+// NewLedgerChangesHandler - creates new instance of LedgerChangesSaver
 func NewLedgerChangesHandler(storage ledgerChangesStorage) *LedgerChangesSaver {
 	return &LedgerChangesSaver{
 		storage: storage,
@@ -69,7 +69,7 @@ func (h *LedgerChangesSaver) handleOpChanges(txID, opID int64, ledgerChanges []x
 	return nil
 }
 
-//Name - name of the handler
+// Name - name of the handler
 func (h *LedgerChangesSaver) Name() string {
 	return "ledger_changes_saver"
 }

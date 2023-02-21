@@ -1,8 +1,8 @@
 package resource
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/helper/fees"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/helper/fees"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/regources"
 )

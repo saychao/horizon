@@ -6,7 +6,7 @@ import (
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 )
 
 // BalancesQ is a helper struct to aid in configuring queries that loads balances

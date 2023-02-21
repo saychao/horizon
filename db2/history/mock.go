@@ -1,9 +1,9 @@
 package history
 
 import (
+	"github.com/saychao/horizon/db2"
 	"github.com/stretchr/testify/mock"
 	"gitlab.com/distributed_lab/kit/pgdb"
-	"github.com/SafeRE-IT/horizon/db2"
 )
 
 type QMock struct {

@@ -1,9 +1,10 @@
 package exchange
 
-import core "github.com/SafeRE-IT/horizon/db2/core2"
+import core "github.com/saychao/horizon/db2/core2"
 
-//go:generate mockery -case underscore -name assetProvider -inpkg -testonly
 // assetProvider - helper interface to get assets from db
+//
+//go:generate mockery -case underscore -name assetProvider -inpkg -testonly
 type assetProvider interface {
 	//SelectByPolicy - selects slice of assets by policy mask
 	SelectByPolicy(policy uint64) ([]core.Asset, error)

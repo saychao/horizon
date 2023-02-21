@@ -3,8 +3,8 @@ package operations
 import (
 	"encoding/hex"
 
-	"github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
+	"github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/internal"
 	"gitlab.com/tokend/go/xdr"
 	"gitlab.com/tokend/regources/generated"
 )

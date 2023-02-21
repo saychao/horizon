@@ -6,19 +6,19 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/saychao/horizon/db2"
 	"gitlab.com/distributed_lab/kit/pgdb"
-	"github.com/SafeRE-IT/horizon/db2"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/guregu/null"
 
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/db2/sqx"
+	"github.com/saychao/horizon/ingest/participants"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/db2/sqx"
-	"github.com/SafeRE-IT/horizon/ingest/participants"
 )
 
 // Clear removes data from the ledger

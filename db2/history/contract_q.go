@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
 	sq "github.com/Masterminds/squirrel"

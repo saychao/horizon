@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"mime"
 	"net/http"
 	"strconv"
@@ -12,13 +12,13 @@ import (
 
 	"time"
 
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/utils"
 	"github.com/spf13/cast"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/go/strkey"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/utils"
 )
 
 const (
@@ -487,7 +487,8 @@ func (base *Base) Path() string {
 }
 
 // ValidateBodyType sets an error on the action if the requests Content-Type
-//  is not `application/x-www-form-urlencoded`
+//
+//	is not `application/x-www-form-urlencoded`
 func (base *Base) ValidateBodyType() {
 	c := base.R.Header.Get("Content-Type")
 

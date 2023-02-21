@@ -3,9 +3,9 @@ package cache
 import (
 	"fmt"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/db2/history"
 	cache "github.com/patrickmn/go-cache"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/db2/history"
 )
 
 // loads data from db or cache

@@ -3,10 +3,10 @@ package render
 import (
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/log"
-	"github.com/SafeRE-IT/horizon/render/jsonapi"
-	"github.com/SafeRE-IT/horizon/render/problem"
 	"github.com/munnerz/goautoneg"
+	"github.com/saychao/horizon/log"
+	"github.com/saychao/horizon/render/jsonapi"
+	"github.com/saychao/horizon/render/problem"
 	"golang.org/x/net/context"
 )
 

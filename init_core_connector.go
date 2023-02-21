@@ -5,8 +5,8 @@ import (
 
 	"time"
 
-	"github.com/SafeRE-IT/horizon/corer"
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/corer"
+	"github.com/saychao/horizon/log"
 )
 
 func initCoreConnector(app *App) {

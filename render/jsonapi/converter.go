@@ -3,7 +3,7 @@ package jsonapi
 import (
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/render/problem"
+	"github.com/saychao/horizon/render/problem"
 )
 
 func FromProblem(p problem.P) *ErrorObject {

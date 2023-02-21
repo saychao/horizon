@@ -1,8 +1,8 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/resource"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/resource"
 )
 
 type KdfParamsAction struct {

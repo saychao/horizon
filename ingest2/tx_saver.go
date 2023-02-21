@@ -1,14 +1,14 @@
 package ingest2
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
+	core "github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/generator"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/generator"
 )
 
 type txStorage interface {
@@ -62,7 +62,7 @@ func (h *TxSaver) Handle(header *core.LedgerHeader, txs []core.Transaction) erro
 	return nil
 }
 
-//Name - returns name of the handler
+// Name - returns name of the handler
 func (h *TxSaver) Name() string {
 	return "tx_saver"
 }

@@ -1,10 +1,10 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/resource/reviewablerequest"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/resource/reviewablerequest"
 )
 
 // ReviewableRequestShowAction renders a reviewable request found by its ID.

@@ -1,14 +1,14 @@
 package ingest2
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
+	core "github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 )
 
 type ledgerStorage interface {
@@ -27,7 +27,7 @@ func NewLedgerHandler(storage ledgerStorage) *LedgerHandler {
 	}
 }
 
-//Name - returns name of the Handler
+// Name - returns name of the Handler
 func (h *LedgerHandler) Name() string {
 	return "ledger_saver"
 }

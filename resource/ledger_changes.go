@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/history"
 )
 
 type LedgerChanges struct {

@@ -3,9 +3,9 @@ package horizon
 import (
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/context/requestid"
-	"github.com/SafeRE-IT/horizon/httpx"
 	gctx "github.com/goji/context"
+	"github.com/saychao/horizon/context/requestid"
+	"github.com/saychao/horizon/httpx"
 	"github.com/zenazn/goji/web"
 	"golang.org/x/net/context"
 )

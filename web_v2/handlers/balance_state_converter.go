@@ -1,12 +1,12 @@
 package handlers
 
 import (
+	"github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/exchange"
+	"github.com/saychao/horizon/web_v2/resources"
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/amount"
-	"github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/exchange"
-	"github.com/SafeRE-IT/horizon/web_v2/resources"
 	regources "gitlab.com/tokend/regources/generated"
 )
 

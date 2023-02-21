@@ -5,15 +5,15 @@ import (
 
 	regources "gitlab.com/tokend/regources/generated"
 
-	"github.com/SafeRE-IT/horizon/db2/history2"
+	"github.com/saychao/horizon/db2/history2"
 
+	"github.com/saychao/horizon/web_v2/ctx"
+	"github.com/saychao/horizon/web_v2/requests"
+	"github.com/saychao/horizon/web_v2/resources"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	"github.com/SafeRE-IT/horizon/web_v2/ctx"
-	"github.com/SafeRE-IT/horizon/web_v2/requests"
-	"github.com/SafeRE-IT/horizon/web_v2/resources"
 )
 
 // GetPollList - processes request to get the list of sales

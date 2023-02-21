@@ -4,10 +4,10 @@ import (
 	"log"
 	"runtime"
 
-	"github.com/SafeRE-IT/horizon/db2/history/schema"
+	"github.com/saychao/horizon/db2/history/schema"
 
-	"github.com/SafeRE-IT/horizon"
-	"github.com/SafeRE-IT/horizon/config"
+	"github.com/saychao/horizon"
+	"github.com/saychao/horizon/config"
 	"github.com/spf13/cobra"
 )
 

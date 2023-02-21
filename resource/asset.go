@@ -3,7 +3,7 @@ package resource
 import (
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
+	"github.com/saychao/horizon/db2/core"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/go/xdr"
 	"gitlab.com/tokend/regources"

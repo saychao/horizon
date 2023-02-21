@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/test"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/test"
 	"github.com/stretchr/testify/assert"
 )
 

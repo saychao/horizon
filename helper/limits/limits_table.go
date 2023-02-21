@@ -1,7 +1,7 @@
 package limits
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/core2"
 )
 
 //Table is used to built complete limits overview,

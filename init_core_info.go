@@ -1,6 +1,6 @@
 package horizon
 
-import "github.com/SafeRE-IT/horizon/log"
+import "github.com/saychao/horizon/log"
 
 func initCoreInfo(app *App) {
 	err := app.UpdateCoreInfo()

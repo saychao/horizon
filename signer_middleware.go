@@ -3,7 +3,7 @@ package horizon
 import (
 	"net/http"
 
-	"github.com/SafeRE-IT/horizon/render/problem"
+	"github.com/saychao/horizon/render/problem"
 	"github.com/zenazn/goji/web"
 	"gitlab.com/tokend/go/signcontrol"
 )

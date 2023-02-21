@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/regources"
 )

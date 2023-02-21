@@ -3,11 +3,11 @@ package horizon
 import (
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/render/sse"
-	"github.com/SafeRE-IT/horizon/resource"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/render/sse"
+	"github.com/saychao/horizon/resource"
 )
 
 type PricesHistoryAction struct {

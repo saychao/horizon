@@ -1,9 +1,9 @@
 package operations
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
-	"github.com/SafeRE-IT/horizon/utf8"
+	"github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/internal"
+	"github.com/saychao/horizon/utf8"
 	"gitlab.com/tokend/go/xdr"
 	regources "gitlab.com/tokend/regources/generated"
 )

@@ -1,8 +1,8 @@
 package operations
 
 import (
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 )
 
 type initiateKycRecoveryOpHandler struct {
@@ -25,7 +25,7 @@ func (h *initiateKycRecoveryOpHandler) Details(op rawOperation, opRes xdr.Operat
 	}, nil
 }
 
-//ParticipantsEffects returns source participant effect and effect for account for which KYC is updated
+// ParticipantsEffects returns source participant effect and effect for account for which KYC is updated
 func (h *initiateKycRecoveryOpHandler) ParticipantsEffects(opBody xdr.OperationBody,
 	opRes xdr.OperationResultTr, sourceAccountID xdr.AccountId, _ []xdr.LedgerEntryChange,
 ) ([]history2.ParticipantEffect, error) {

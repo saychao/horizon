@@ -1,21 +1,21 @@
 package exchange
 
 import (
+	core "github.com/saychao/horizon/db2/core2"
 	"gitlab.com/distributed_lab/logan"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/go/xdr"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
 )
 
-//Converter - helper struct which allows to convert amount in asset into amount in another asset
+// Converter - helper struct which allows to convert amount in asset into amount in another asset
 // supports indirect conversion with one hop
 type Converter struct {
 	assetProvider assetProvider
 	baseAssets    []string
 }
 
-//NewConverter - creates new ready to work instance of Converter
+// NewConverter - creates new ready to work instance of Converter
 func NewConverter(assetProvider assetProvider) (*Converter, error) {
 	baseAssets, err := assetProvider.SelectByPolicy(uint64(xdr.AssetPolicyBaseAsset))
 	if err != nil {
@@ -33,7 +33,7 @@ func NewConverter(assetProvider assetProvider) (*Converter, error) {
 	return result, nil
 }
 
-//TryToConvertWithOneHop - tries to convert amount in fromAsset into amount in toAsset
+// TryToConvertWithOneHop - tries to convert amount in fromAsset into amount in toAsset
 // if no direct conversion possible, tries to do it with one cop;
 // if several conversions are available selects one that results in maximizing converted amount
 // if fails to find path to convert - returns nil, nil
@@ -197,7 +197,7 @@ func (c *Converter) convertToDestAsset(pair core.AssetPair, destCode string, amo
 	}
 }
 
-//isOverlaps - returns true if one of the assets of anotherPair is equal to one of the assets of pair
+// isOverlaps - returns true if one of the assets of anotherPair is equal to one of the assets of pair
 func isOverlaps(pair, anotherPair core.AssetPair) bool {
 	return contains(pair, anotherPair.Base) || contains(pair, anotherPair.Quote)
 }
@@ -207,7 +207,7 @@ func contains(pair core.AssetPair, asset string) bool {
 	return pair.Base == asset || pair.Quote == asset
 }
 
-//equalsOrInverted - returns true if other pair is the same or inverted
+// equalsOrInverted - returns true if other pair is the same or inverted
 func equalsOrInverted(pair, other core.AssetPair) bool {
 	return (pair.Base == other.Base && pair.Quote == other.Quote) ||
 		(pair.Base == other.Quote && pair.Quote == other.Base)

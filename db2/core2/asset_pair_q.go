@@ -3,7 +3,7 @@ package core2
 import (
 	"database/sql"
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )

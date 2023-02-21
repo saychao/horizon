@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/utf8"
 	"github.com/guregu/null"
+	"github.com/saychao/horizon/utf8"
 	"gitlab.com/tokend/go/strkey"
 	"gitlab.com/tokend/go/xdr"
 )

@@ -11,7 +11,7 @@ import (
 
 	"context"
 
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/log"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

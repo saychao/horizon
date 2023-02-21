@@ -2,13 +2,13 @@ package history
 
 import (
 	"database/sql"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"time"
 
 	"fmt"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2/sqx"
+	"github.com/saychao/horizon/db2/sqx"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )

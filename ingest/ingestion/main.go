@@ -2,7 +2,7 @@ package ingestion
 
 import (
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/distributed_lab/kit/pgdb"
 )
 

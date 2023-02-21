@@ -6,9 +6,9 @@ import (
 	"encoding/hex"
 	"encoding/json"
 
+	"github.com/saychao/horizon/utf8"
 	"gitlab.com/tokend/go/amount"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/utf8"
 	"gitlab.com/tokend/regources"
 )
 

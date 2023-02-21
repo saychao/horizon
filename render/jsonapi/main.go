@@ -8,8 +8,8 @@ import (
 	"strconv"
 
 	"github.com/go-errors/errors"
-	"github.com/SafeRE-IT/horizon/log"
-	"github.com/SafeRE-IT/horizon/render/problem"
+	"github.com/saychao/horizon/log"
+	"github.com/saychao/horizon/render/problem"
 )
 
 type ErrorObject struct {

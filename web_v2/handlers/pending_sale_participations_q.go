@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/core2"
-	"github.com/SafeRE-IT/horizon/web_v2/requests"
-	"github.com/SafeRE-IT/horizon/web_v2/resources"
+	"github.com/saychao/horizon/db2/core2"
+	"github.com/saychao/horizon/web_v2/requests"
+	"github.com/saychao/horizon/web_v2/resources"
 
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	regources "gitlab.com/tokend/regources/generated"

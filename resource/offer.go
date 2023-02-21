@@ -3,11 +3,11 @@ package resource
 import (
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
+	"github.com/saychao/horizon/db2/core"
 	"gitlab.com/tokend/regources"
 )
 

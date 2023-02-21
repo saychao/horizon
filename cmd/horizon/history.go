@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/SafeRE-IT/horizon/db2/history/schema"
+	"github.com/saychao/horizon/db2/history/schema"
 	"github.com/spf13/cobra"
 )
 

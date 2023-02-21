@@ -8,7 +8,7 @@ import (
 
 	"fmt"
 
-	core "github.com/SafeRE-IT/horizon/db2/core2"
+	core "github.com/saychao/horizon/db2/core2"
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/distributed_lab/logan/v3/errors"

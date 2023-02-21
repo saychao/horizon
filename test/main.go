@@ -10,10 +10,10 @@ import (
 	"testing"
 
 	"github.com/jmoiron/sqlx"
+	hlog "github.com/saychao/horizon/log"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	hlog "github.com/SafeRE-IT/horizon/log"
 	"golang.org/x/net/context"
 )
 

@@ -1,9 +1,9 @@
 package operations
 
 import (
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 	regources "gitlab.com/tokend/regources/generated"
 )
 

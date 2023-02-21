@@ -1,8 +1,8 @@
 package operations
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/render/hal"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/render/hal"
 	"gitlab.com/tokend/go/xdr"
 	"golang.org/x/net/context"
 )

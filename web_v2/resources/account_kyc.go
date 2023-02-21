@@ -1,7 +1,7 @@
 package resources
 
 import (
-	"github.com/SafeRE-IT/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/core2"
 
 	regources "gitlab.com/tokend/regources/generated"
 )
@@ -16,7 +16,7 @@ func NewAccountKYC(kyc core2.AccountKYC) regources.AccountKyc {
 	}
 }
 
-//NewAccountRoleKey - returns new instance of key for account role
+// NewAccountRoleKey - returns new instance of key for account role
 func NewAccountKYCKey(address string) regources.Key {
 	return regources.Key{
 		ID:   address,

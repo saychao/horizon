@@ -10,9 +10,9 @@ import (
 
 	"gitlab.com/distributed_lab/logan/v3/errors"
 
-	"github.com/SafeRE-IT/horizon/txsub/v2"
+	"github.com/saychao/horizon/txsub/v2"
 
-	"github.com/SafeRE-IT/horizon/web_v2/ctx"
+	"github.com/saychao/horizon/web_v2/ctx"
 )
 
 // GetAccountRule - represents params to be specified by user for Get account rule handler

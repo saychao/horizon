@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 )
 
 type RecoveryRequest struct {

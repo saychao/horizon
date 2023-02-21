@@ -1,8 +1,8 @@
 package ingest
 
 import (
+	"github.com/saychao/horizon/db2/core"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	"github.com/SafeRE-IT/horizon/db2/core"
 )
 
 // Load runs queries against `core` to fill in the records of the bundle.

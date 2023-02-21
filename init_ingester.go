@@ -1,8 +1,8 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/ingest"
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/ingest"
+	"github.com/saychao/horizon/log"
 )
 
 func initIngester(app *App) {

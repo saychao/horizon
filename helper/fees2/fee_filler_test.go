@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/magiconair/properties/assert"
-	core "github.com/SafeRE-IT/horizon/db2/core2"
+	core "github.com/saychao/horizon/db2/core2"
 )
 
 func TestFillFeeGaps(t *testing.T) {

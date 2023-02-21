@@ -3,7 +3,7 @@ package resource
 import (
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
+	"github.com/saychao/horizon/db2/core"
 	"gitlab.com/tokend/regources"
 )
 

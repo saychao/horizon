@@ -2,7 +2,7 @@ package reviewablerequest
 
 import (
 	"encoding/json"
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/regources"
 )

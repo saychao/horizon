@@ -3,7 +3,7 @@ package reviewablerequest
 import (
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/tokend/regources"
 )
 

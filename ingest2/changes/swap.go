@@ -3,10 +3,10 @@ package changes
 import (
 	"encoding/hex"
 
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
+	"github.com/saychao/horizon/ingest2/internal"
 	regources "gitlab.com/tokend/regources/generated"
 
-	history "github.com/SafeRE-IT/horizon/db2/history2"
+	history "github.com/saychao/horizon/db2/history2"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"

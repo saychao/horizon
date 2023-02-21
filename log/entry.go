@@ -1,7 +1,7 @@
 package log
 
 import (
-	"github.com/SafeRE-IT/horizon/errors"
+	"github.com/saychao/horizon/errors"
 	"gitlab.com/distributed_lab/logan/v3"
 )
 

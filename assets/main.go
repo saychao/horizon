@@ -7,7 +7,7 @@ import (
 
 	"fmt"
 
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/log"
 )
 
 //go:generate go-bindata -nometadata -ignore .+\.go$ -pkg assets -o bindata.go ./...

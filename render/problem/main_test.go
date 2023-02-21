@@ -5,8 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/SafeRE-IT/horizon/context/requestid"
-	"github.com/SafeRE-IT/horizon/test"
+	"github.com/saychao/horizon/context/requestid"
+	"github.com/saychao/horizon/test"
 	. "github.com/smartystreets/goconvey/convey"
 	"golang.org/x/net/context"
 )

@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/resource/operations"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/resource/operations"
 	"golang.org/x/net/context"
 )
 

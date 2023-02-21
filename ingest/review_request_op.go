@@ -3,8 +3,8 @@ package ingest
 import (
 	"encoding/json"
 
-	"github.com/SafeRE-IT/horizon/db2/history"
-	"github.com/SafeRE-IT/horizon/utf8"
+	"github.com/saychao/horizon/db2/history"
+	"github.com/saychao/horizon/utf8"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"

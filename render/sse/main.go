@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/log"
 	"golang.org/x/net/context"
 )
 

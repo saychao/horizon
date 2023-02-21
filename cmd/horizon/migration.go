@@ -2,14 +2,14 @@ package main
 
 import (
 	"database/sql"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"log"
 	"os"
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/ingest2"
+	"github.com/saychao/horizon/ingest2"
 
-	"github.com/SafeRE-IT/horizon/db2/history/schema"
+	"github.com/saychao/horizon/db2/history/schema"
 	"github.com/spf13/cobra"
 )
 

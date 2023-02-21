@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	regources "gitlab.com/tokend/regources/generated"
 	"time"
 

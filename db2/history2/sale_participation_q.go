@@ -3,7 +3,7 @@ package history2
 import (
 	"database/sql"
 
-	"github.com/SafeRE-IT/horizon/db2/core2"
+	"github.com/saychao/horizon/db2/core2"
 
 	sq "github.com/Masterminds/squirrel"
 	"gitlab.com/distributed_lab/kit/pgdb"

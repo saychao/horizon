@@ -1,8 +1,8 @@
 package horizon
 
 import (
-	"github.com/SafeRE-IT/horizon/render/hal"
 	metrics "github.com/rcrowley/go-metrics"
+	"github.com/saychao/horizon/render/hal"
 )
 
 // MetricsAction collects and renders a snapshot from the metrics system that

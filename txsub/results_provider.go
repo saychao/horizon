@@ -7,11 +7,11 @@ import (
 	"database/sql"
 	"encoding/base64"
 
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/db2/history"
 	"gitlab.com/distributed_lab/logan"
 	"gitlab.com/distributed_lab/txsub"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/db2/history"
 	"golang.org/x/net/context"
 )
 

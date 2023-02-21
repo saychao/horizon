@@ -5,14 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/SafeRE-IT/horizon/resource"
+	"github.com/saychao/horizon/resource"
 
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"
 
 	"github.com/google/jsonapi"
 
-	"github.com/SafeRE-IT/horizon/txsub/v2"
+	"github.com/saychao/horizon/txsub/v2"
 	regources "gitlab.com/tokend/regources/generated"
 )
 

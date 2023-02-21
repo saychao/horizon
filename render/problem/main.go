@@ -7,10 +7,10 @@ import (
 
 	"time"
 
-	"github.com/SafeRE-IT/horizon/context/requestid"
-	"github.com/SafeRE-IT/horizon/log"
-	"github.com/SafeRE-IT/horizon/utils"
 	"github.com/go-errors/errors"
+	"github.com/saychao/horizon/context/requestid"
+	"github.com/saychao/horizon/log"
+	"github.com/saychao/horizon/utils"
 	"golang.org/x/net/context"
 )
 
@@ -146,7 +146,7 @@ var (
 		Detail: "An error occurred while processing this request.  This is usually due " +
 			"to a bug within the server software.  Trying this request again may " +
 			"succeed if the bug is transient, otherwise please report this issue " +
-			"to the issue tracker at: https://github.com/SafeRE-IT/horizon/issues." +
+			"to the issue tracker at: https://github.com/saychao/horizon/issues." +
 			" Please include this response in your issue.",
 	}
 

@@ -1,9 +1,9 @@
 package resource
 
 import (
+	"github.com/saychao/horizon/httpx"
+	"github.com/saychao/horizon/render/hal"
 	"gitlab.com/distributed_lab/txsub"
-	"github.com/SafeRE-IT/horizon/httpx"
-	"github.com/SafeRE-IT/horizon/render/hal"
 	"golang.org/x/net/context"
 )
 

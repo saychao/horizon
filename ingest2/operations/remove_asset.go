@@ -1,8 +1,8 @@
 package operations
 
 import (
+	"github.com/saychao/horizon/db2/history2"
 	"gitlab.com/tokend/go/xdr"
-	"github.com/SafeRE-IT/horizon/db2/history2"
 )
 
 type removeAssetOpHandler struct {
@@ -23,7 +23,7 @@ func (h *removeAssetOpHandler) Details(op rawOperation,
 	}, nil
 }
 
-//ParticipantsEffects - returns source of the operation
+// ParticipantsEffects - returns source of the operation
 func (h *removeAssetOpHandler) ParticipantsEffects(opBody xdr.OperationBody,
 	_ xdr.OperationResultTr, sourceAccountID xdr.AccountId, ledgerChanges []xdr.LedgerEntryChange,
 ) ([]history2.ParticipantEffect, error) {

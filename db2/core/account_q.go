@@ -2,7 +2,7 @@ package core
 
 import (
 	"database/sql"
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 
 	sq "github.com/Masterminds/squirrel"
 )

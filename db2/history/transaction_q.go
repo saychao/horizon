@@ -1,11 +1,11 @@
 package history
 
 import (
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 	"strconv"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/SafeRE-IT/horizon/toid"
+	"github.com/saychao/horizon/toid"
 )
 
 var selectTransaction = sq.Select(

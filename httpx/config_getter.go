@@ -4,7 +4,7 @@ import (
 	"context"
 
 	context2 "github.com/goji/context"
-	"github.com/SafeRE-IT/horizon/config"
+	"github.com/saychao/horizon/config"
 )
 
 type configgetter interface {

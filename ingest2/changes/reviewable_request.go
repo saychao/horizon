@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/SafeRE-IT/horizon/db2"
+	"github.com/saychao/horizon/db2"
 
-	history "github.com/SafeRE-IT/horizon/db2/history2"
-	"github.com/SafeRE-IT/horizon/ingest2/internal"
-	"github.com/SafeRE-IT/horizon/utf8"
+	history "github.com/saychao/horizon/db2/history2"
+	"github.com/saychao/horizon/ingest2/internal"
+	"github.com/saychao/horizon/utf8"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/tokend/go/xdr"

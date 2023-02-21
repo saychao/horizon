@@ -3,11 +3,11 @@ package horizon
 import (
 	"database/sql"
 
-	"github.com/SafeRE-IT/horizon/db2/core"
-	"github.com/SafeRE-IT/horizon/render/hal"
-	"github.com/SafeRE-IT/horizon/render/problem"
-	"github.com/SafeRE-IT/horizon/resource"
 	"github.com/go-errors/errors"
+	"github.com/saychao/horizon/db2/core"
+	"github.com/saychao/horizon/render/hal"
+	"github.com/saychao/horizon/render/problem"
+	"github.com/saychao/horizon/resource"
 
 	"gitlab.com/tokend/go/xdr"
 	"gitlab.com/tokend/regources"

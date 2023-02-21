@@ -6,7 +6,7 @@ import (
 
 	"gitlab.com/distributed_lab/running"
 
-	"github.com/SafeRE-IT/horizon/log"
+	"github.com/saychao/horizon/log"
 
 	"github.com/lib/pq"
 
