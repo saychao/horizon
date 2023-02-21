@@ -1,4 +1,4 @@
-module github.com/SafeRE-IT/horizon
+module github.com/saychao/horizon
 
 go 1.16
 

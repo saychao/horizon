@@ -3,7 +3,7 @@
 GENERATOR_IMAGE=registry.gitlab.com/tokend/openapi-go-generator:acee5bc606997864a49bc213e8dd164bfb077d18 # latest generator commit in master
 
 GENERATED="${GOPATH}/src/gitlab.com/tokend/regources/generated"
-OPENAPI_DIR="${GOPATH}/src/github.com/SafeRE-IT/horizon/docs/build"
+OPENAPI_DIR="${GOPATH}/src/github.com/saychao/horizon/docs/build"
 PACKAGE_NAME=regources
 
 function printHelp {
@@ -28,7 +28,7 @@ function parseArgs {
                 printHelp && exit 0
                 ;;
             -v | --to-vendor)
-                GENERATED="${GOPATH}/src/github.com/SafeRE-IT/horizon/vendor/gitlab.com/tokend/regources/generated"
+                GENERATED="${GOPATH}/src/github.com/saychao/horizon/vendor/gitlab.com/tokend/regources/generated"
                 ;;
             -p | --path-to-generate) shift
                 [[ ! -d $1 ]] && echo "path $1 does not exist or not a dir" && exit 1
