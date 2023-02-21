@@ -1,0 +1,46 @@
+ManageSignerOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-signer"
+        - "operations-update-signer"
+        - "operations-remove-signer"
+
+ManageSignerOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageSignerOpKey'
+  - type: object
+    properties:
+      relationships:
+        type: object
+        nullable: true
+        properties:
+          role:
+            $ref: '#/components/schemas/SignerRoleKey'
+          signer:
+            $ref: '#/components/schemas/SignerKey'
+      attributes:
+        type: object
+        nullable: true
+        required:
+          - details
+          - identity
+          - weight
+        properties:
+          identity:
+            type: integer
+            format: uint32
+          weight:
+            type: integer
+            format: uint32
+            example: 12
+            minimum: 1
+            maximum: 1000
+            description: "Weight of the signer fo the account"
+          details:
+            $ref: '#/components/schemas/Details'

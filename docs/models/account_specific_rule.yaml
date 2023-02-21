@@ -1,0 +1,37 @@
+AccountSpecificRuleKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "7582"
+    type:
+      type: string
+      enum:
+        - "account-specific-rules"
+
+AccountSpecificRule:
+  allOf:
+    - $ref: '#/components/schemas/AccountSpecificRuleKey'
+    - type: object
+      required: [attributes]
+      properties:
+        attributes:
+          type: object
+          required: [forbids, ledger_key]
+          properties:
+            account_id:
+              type: string
+              description: "Defines whether rule is applied to specific user, or to all users"
+            forbids:
+              type: boolean
+              description: "defines whether or not it is forbidden to access resource"
+              example: false
+            ledger_key:
+              allOf:
+                - $ref: '#/components/schemas/Details'
+              type: object
+              format: xdr.LedgerKey
+              description: "Ledger entry key"

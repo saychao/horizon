@@ -1,0 +1,68 @@
+/v3/accounts:
+  get:
+    tags:
+      - Accounts
+    summary: Accounts list
+    description: |
+                  Allows to get list of accounts. Admin signature is required.
+    operationId: getAccountList
+    parameters:
+    - name: filter[account]
+      in: query
+      description: |
+        Filters accounts by account id
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+    - name: filter[role]
+      in: query
+      description: |
+        Filters accounts by role id
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: integer
+      # TODO add include signer
+    - $ref: '#/components/schemas/pageNumberParam'
+    - $ref: '#/components/schemas/pageLimitParam'
+    - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: asset exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Account'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/accounts?page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/accounts?page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

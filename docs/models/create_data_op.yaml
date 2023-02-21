@@ -1,0 +1,33 @@
+CreateDataOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-data"
+
+CreateDataOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateDataOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          owner:
+            $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required:
+          - type
+          - value
+        properties:
+          type:
+            type: integer
+            format: uint64
+          value:
+            $ref: '#/components/schemas/Details'

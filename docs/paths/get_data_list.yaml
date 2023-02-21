@@ -1,0 +1,58 @@
+/v3/data:
+  get:
+    tags:
+      - Data
+    summary: Data List
+    description: |
+      Allows getting list of `Data` resources.
+    parameters:
+      - name: filter[type]
+        in: query
+        description: |
+          Filter data by its security type
+        schema:
+          type: string
+      - name: filter[owner]
+        in: query
+        description: |
+          Filter data by its owner
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - owner
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Data'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccountKey'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

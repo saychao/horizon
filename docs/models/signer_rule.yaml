@@ -1,0 +1,69 @@
+SignerRuleKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "7582"
+      type:
+        type: string
+        enum: 
+          - "signer-rules"
+SignerRule:
+  allOf:
+  - $ref: '#/components/schemas/SignerRuleKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          owner:
+            type: object
+            required: [data]
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required: [action, forbids, details, resource, is_default]
+        properties:
+          action:
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+            format: xdr.SignerRuleAction
+            description: |
+                          defines an action to be performed over the specified resource
+                          * 1:  "any"
+                          * 2:  "create"
+                          * 3:  "create_for_other"
+                          * 4:  "update"
+                          * 5:  "manage"
+                          * 6:  "send"
+                          * 7:  "remove"
+                          * 8:  "cancel"
+                          * 9:  "review"
+                          * 10: "receive_atomic_swap"
+                          * 11: "participate"
+                          * 12: "bind"
+                          * 13: "update_max_issuance"
+                          * 14: "check"
+          forbids:
+            type: boolean
+            description: "defines whether the specified action is forbidden"
+            example: false
+          details:
+            $ref: '#/components/schemas/Details'
+            description: "free-form object to attach details to the rule"
+          resource:
+            allOf:
+              - $ref: '#/components/schemas/Details'
+            type: object
+            format: xdr.SignerRuleResource
+            description: "defines a resource to which the rule is applied. TODO: add link to XDR"
+          is_default:
+            type: boolean
+            description: "defines whether this rule should be included into all new roles"
+            example: true

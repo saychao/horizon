@@ -1,0 +1,62 @@
+/v3/asset_pairs/{id}:
+  get:
+    tags:
+      - Asset Pairs
+    summary: AssetPair by ID
+    description: |
+                  Allows getting `AssetPair` with corresponding details.
+    operationId: getAssetPairByID
+    parameters:
+    - name: id
+      in: path
+      description: Unique identifier of an asset pair that consists of two asset codes
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: BASE:QUOTE
+        example: "BTC:ETH"
+    - name: include
+      in: query
+      description: |
+                    Relationships that may be used for the `include` parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        example: "base_asset"
+        enum:
+          - base_asset
+          - quote_asset
+    responses:
+      200:
+        description: asset pair exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/AssetPair'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Asset'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: asset pair does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

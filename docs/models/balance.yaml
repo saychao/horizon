@@ -1,0 +1,74 @@
+BalanceStateKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+    id:
+      type: string
+      example: "BDLXKLLVS6UIQEDYCZKIC5222GGQLCOTHM4BWXVCBDQMJTUWUFUATV2Q"
+    type:
+      type: string
+      enum:
+        - "balances-state"
+BalanceState:
+  allOf:
+  - $ref: '#/components/schemas/BalanceStateKey'
+  - type: object
+    required: [relationships]
+    properties:
+      attributes:
+        type: object
+        required:
+          - available
+          - locked
+        properties:
+          available:
+            type: string
+            example: "1200.123456"
+            format: Amount
+            description: "Amount available to be spent by an account"
+          locked:
+            type: string
+            example: "10.123456"
+            format: Amount
+            description: "Amount locked on the balance by some operation (ex: ManageOffer, CreateWithdrawalRequest, etc.) and controlled by the system."
+BalanceKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "BDLXKLLVS6UIQEDYCZKIC5222GGQLCOTHM4BWXVCBDQMJTUWUFUATV2Q"
+      type:
+        type: string
+        enum:
+          - "balances"
+Balance:
+  allOf:
+  - $ref: '#/components/schemas/BalanceKey'
+  - type: object
+    properties:
+      relationships:
+        type: object
+        properties:
+          asset:
+            type: object
+            description: "asset the balance of which is shown"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          state:
+            type: object
+            description: "current state of the balance"
+            properties:
+              data:
+                $ref: '#/components/schemas/BalanceStateKey'
+          owner:
+            type: object
+            description: "owner of the balance"
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'

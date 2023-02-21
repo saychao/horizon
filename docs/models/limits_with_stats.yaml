@@ -1,0 +1,43 @@
+LimitsWithStatsKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "1"
+    type:
+      type: string
+      enum:
+        - "limits-with-stats"
+
+LimitsWithStats:
+  allOf:
+    - $ref: '#/components/schemas/LimitsWithStatsKey'
+    - type: object
+      required: [attributes,relationships]
+      properties:
+        attributes:
+          type: object
+          required: [limits,statistics]
+          properties:
+            limits:
+              description: |
+                            Defines limits related to a particular account.
+                            If there are no limits applied to the account - have INT64_MAX in all numeric fields
+              type: object
+              $ref: '#/components/schemas/Limits'
+            statistics:
+              description: "defines statistics related to a particular account"
+              type: object
+              $ref: '#/components/schemas/Statistics'
+        relationships:
+          type: object
+          properties:
+            account:
+              type: object
+              description: "account related to a particular entry"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'

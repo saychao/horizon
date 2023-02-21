@@ -1,0 +1,95 @@
+ManageLimitsOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-manage-limits"
+
+ManageLimitsOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageLimitsOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required: [action]
+        properties:
+          action:
+            type: integer
+            format: xdr.ManageLimitsAction
+            description: |
+              * 0: "create",
+              * 1: "remove"
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+          create:
+            nullable: true
+            $ref: '#/components/schemas/ManageLimitsCreationOp'
+          remove:
+            nullable: true
+            $ref: '#/components/schemas/ManageLimitsRemovalOp'
+
+ManageLimitsCreationOp:
+  type: object
+  required:
+    - stats_op_type
+    - asset_code
+    - account_address
+    - is_convert_needed
+    - daily_out
+    - weekly_out
+    - monthly_out
+    - annual_out
+  properties:
+    account_role:
+      nullable: true
+      type: integer
+      format: xdr.Uint64
+      example: 2
+    account_address:
+      type: string
+    stats_op_type:
+      type: integer
+      format: xdr.StatsOpType
+      description: |
+        * 1: "payment_out"
+        * 2: "withdraw"
+        * 3: "spend"
+        * 4: "deposit"
+        * 5: "payout"
+      allOf:
+      - $ref: '#/components/schemas/Enum'
+    asset_code:
+      type: string
+      example: "USD"
+      description: "Asset for which limits are being set"
+    is_convert_needed:
+      type: boolean #todo
+    daily_out:
+      type: string
+      format: Amount
+    weekly_out:
+      type: string
+      format: Amount
+    monthly_out:
+      type: string
+      format: Amount
+    annual_out:
+      type: string
+      format: Amount
+
+ManageLimitsRemovalOp:
+  type: object
+  required:
+    - limits_id
+  properties:
+    limits_id:
+      type: integer
+      format: int64
+      example: 12
+      description: "ID of limits entry to remove"

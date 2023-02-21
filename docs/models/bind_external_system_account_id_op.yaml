@@ -1,0 +1,25 @@
+BindExternalSystemAccountIdOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-bind-external-system-account-id"
+
+BindExternalSystemAccountIdOp:
+  allOf:
+  - $ref: '#/components/schemas/BindExternalSystemAccountIdOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - external_system_type
+        properties:
+          external_system_type:
+            type: integer
+            description: "External system type to bind"

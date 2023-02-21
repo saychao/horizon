@@ -1,0 +1,796 @@
+
+xdr.AssetPolicy:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.BindExternalSystemAccountIdResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.BucketEntryType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CancelAtomicSwapBidResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.RemoveAssetPairResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CancelSaleCreationRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+xdr.CancelChangeRoleRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CheckSaleStateEffect:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.AccountRuleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.AssetPairPolicy:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateAtomicSwapBidRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateAtomicSwapAskRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateAccountResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateAmlAlertRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateChangeRoleRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateIssuanceRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CheckSaleStateResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ContractState:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateSaleCreationRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateWithdrawalRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CryptoKeyType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.EmissionFeeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.EnvelopeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ErrorCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreateManageLimitsRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.CreatePreIssuanceRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.KeyValueEntryType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.LedgerEntryChangeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.LedgerEntryType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.LedgerUpgradeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.LedgerVersion:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.LicenseResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.FeeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.IpAddrType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAccountRuleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAccountRuleResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAssetAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAssetPairAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAssetPairResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAssetResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAccountRoleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageAccountRoleResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageContractAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageContractRequestAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageContractRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageContractResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageExternalSystemAccountIdPoolEntryAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageExternalSystemAccountIdPoolEntryResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageBalanceAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageBalanceResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageKeyValueResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageKvAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageLimitsAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageLimitsResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageOfferEffect:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageOfferResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageInvoiceRequestAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageInvoiceRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerRoleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerRoleResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerRuleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSignerRuleResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSaleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ManageSaleResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.OperationResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.OperationType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.PaymentDestinationType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.PaymentFeeType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.PaymentResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.PayoutResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.MemoType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.MessageType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ReviewRequestResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ReviewableRequestType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.SaleType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ScpStatementType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.SetFeesResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.SignerRuleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.PublicKeyType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ReviewRequestOpAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.ThresholdIndexes:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.TransactionResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.StampResultCode:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+
+xdr.StatsOpType:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+xdr.ManagePollAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+xdr.PollResult:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string
+
+xdr.ManageAccountSpecificRuleAction:
+  type: object
+  properties:
+    value:
+      type: integer
+    name:
+      type: string

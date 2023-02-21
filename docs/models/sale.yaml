@@ -1,0 +1,153 @@
+SaleKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "sales"
+
+Sale:
+  allOf:
+    - $ref: '#/components/schemas/SaleKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required: [start_time, end_time, sale_type, sale_state, access_definition_type, details, base_hard_cap, participants_count, participations_count]
+          properties:
+            base_hard_cap:
+              type: string
+              format: Amount
+              description: "Hard cap calculated in base asset"
+              example: "140000.000000"
+            start_time:
+              type: string
+              description: "time when the sale starts"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            end_time:
+              type: string
+              description: "time when the sale expires"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            sale_type:
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+              format: xdr.SaleType
+              description: "type of sale"
+              example: 2
+            sale_state:
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+              format: SaleState
+              description: "state of sale" # todo provide a list of sale states
+              example: 2
+            access_definition_type:
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+              format: SaleAccessDefinitionType
+              description: |
+                indicates access definition type of the sale
+                * 0 - none
+                * 1 - whitelist
+                * 2 - blacklist
+            details:
+              $ref: '#/components/schemas/Details'
+              description: "free-form object to attach details to the sale"
+            participants_count:
+              type: int64
+              description: "participants count in sale"
+            participations_count:
+              type: int64
+              description: "participations count in sale"
+        relationships:
+          type: object
+          properties:
+            owner:
+              description: "Owner of the sale"
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/AccountKey'
+            base_asset:
+              description: "Base asset of the sale"
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            quote_assets:
+              description: "Quote assets specified for the sale"
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SaleQuoteAssetKey'
+            default_quote_asset:
+              description: "Quote asset specified as default for the sale"
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/SaleQuoteAssetKey'
+
+SaleQuoteAssetKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "sale-quote-assets"
+
+SaleQuoteAsset:
+  allOf:
+    - $ref: '#/components/schemas/SaleQuoteAssetKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - price
+            - current_cap
+            - total_current_cap
+            - hard_cap
+            - soft_cap
+          properties:
+            price:
+              type: string
+              format: Amount
+            current_cap:
+              type: string
+              format: Amount
+            total_current_cap:
+              type: string
+              format: Amount
+            hard_cap:
+              type: string
+              format: Amount
+            soft_cap:
+              type: string
+              format: Amount
+        relationships:
+          type: object
+          properties:
+            asset:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/AssetKey'

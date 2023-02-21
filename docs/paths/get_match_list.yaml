@@ -1,0 +1,89 @@
+/v3/matches:
+  get:
+    tags:
+      - Matches
+    summary: Match List
+    description: |
+      Allows getting a filtered list of `Match` with corresponding details.\n
+    operationId: getMatches
+    parameters:
+      - name: filter[base_asset]
+        in: query
+        description: |
+          Filters matches by specified base asset code
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: valid assetCode
+          example: "BTC"
+      - name: filter[quote_asset]
+        in: query
+        description: |
+          Filters matches by specified quote asset code
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: valid assetCode
+          example: "ETH"
+      - name: filter[order_book]
+        in: query
+        description: |
+          Filters offers by specified order book ID
+          Defines whether offers are for sale or for trade
+          (0 - secondary market, saleId - for specific sale)
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: number
+          format: int64
+          example: 2
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: matches exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Match'
+                included:
+                  type: array
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/matches?include=asset&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/matches?include=asset&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: order book does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

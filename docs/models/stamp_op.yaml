@@ -1,0 +1,34 @@
+StampOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-stamp"
+
+StampOp:
+  allOf:
+  - $ref: '#/components/schemas/StampOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - ledger_hash
+          - license_hash
+        properties:
+          ledger_hash:
+            type: string
+            example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+            description: "Stamped ledger hash"
+          license_hash:
+            type: string
+            example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+            description: "Hash of the latest license"
+
+
+

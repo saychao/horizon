@@ -1,0 +1,33 @@
+CreateDataOwnerUpdateRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-owner-data-update-request"
+
+CreateDataOwnerUpdateRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateDataOwnerUpdateRequestOpKey'
+  - type: object
+    required: [ relationships, attributes ]
+    properties:
+      relationships:
+        type: object
+        properties:
+          owner:
+            $ref: '#/components/schemas/AccountKey'
+          request:
+            $ref: '#/components/schemas/RequestKey'
+          data:
+            $ref: '#/components/schemas/DataKey'
+      attributes:
+        type: object
+        required:
+          - creator_details
+        properties:
+          creator_details:
+            $ref: '#/components/schemas/Details'

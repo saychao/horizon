@@ -1,0 +1,76 @@
+/v3/sales/{id}/relationships/whitelist:
+  get:
+    tags:
+      - Crowd Investing
+    summary: Whitelist for sale
+    description: |
+      Allows getting whitelist for sale.\n
+      🔒 Admin or sale owner signature is required.\n
+    operationId: saleWhitelist
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of a sale
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: filter[address]
+        in: query
+        description: |
+          Filters entries by account address where they applied
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: valid accountID
+          example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: whitelist exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SaleWhitelist'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/sales/{id}/relationships/whitelist?page[cursor]=1&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/sales/{id}/relationships/whitelist?page[cursor]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: whitelist does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

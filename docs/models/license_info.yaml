@@ -1,0 +1,37 @@
+LicenseInfoKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "12"
+    type:
+      type: string
+      enum:
+        - "license-info"
+
+LicenseInfo:
+  allOf:
+    - $ref: '#/components/schemas/LicenseInfoKey'
+    - type: object
+      required: [attributes]
+      properties:
+        attributes:
+          type: object
+          required: [admin_count, current_admin_count, due_date]
+          properties:
+            due_date:
+              type: string
+              format: date-time
+              description: "license expiration date"
+              example: "2019-03-04T18:42:15Z"
+            admin_count:
+              type: integer
+              format: int64
+              description: "maximal allowed number of admins"
+            current_admin_count:
+              type: integer
+              format: int64
+              description: "current number of admins"

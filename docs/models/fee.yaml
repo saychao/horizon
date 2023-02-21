@@ -1,0 +1,161 @@
+FeeKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "a343e3cbcc72928a571778f77bf2554eb5b72c79ce28bbc9d3325c60c21e5241"
+      type:
+        type: string
+        enum: 
+          - "fees"
+
+
+CalculatedFeeKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "a343e3cbcc72928a571778f77bf2554eb5b72c79ce28bbc9d3325c60c21e5241"
+      type:
+        type: string
+        enum:
+          - "calculated-fee"
+
+CalculatedFee:
+  allOf:
+  - $ref: '#/components/schemas/CalculatedFeeKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        $ref: '#/components/schemas/Fee'
+
+FeeAppliedTo:
+  type: object
+  required:
+    - asset
+    - subtype
+    - fee_type
+    - lower_bound
+    - upper_bound
+    - fee_type_extended
+  properties:
+    asset:
+      type: string
+      description: "Unique identifier of an asset"
+      example: "USD"
+    subtype:
+      type: integer
+      format: int64
+      description: "Subtype of the fee"
+      example: 1
+    fee_type:
+      type: integer
+      description: "Type of the fee"
+      minimum: 0
+      maximum: 7
+      example: 2
+    fee_type_extended:
+      format: xdr.FeeType
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+    lower_bound:
+      type: string
+      description: "lower bound for the fee"
+      example: "123.123456"
+      format: Amount
+    upper_bound:
+      type: string
+      description: "upper bound for the fee"
+      example: "321.654321"
+      format: Amount
+
+FeeRecord:
+  allOf:
+  - $ref: '#/components/schemas/FeeKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          asset:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+          account:
+            type: object
+            description: "Account for which the fee is set"
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+          account_role:
+            type: object
+            description: "Account role for which the fee is set"
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountRoleKey'
+      attributes:
+        type: object
+        required: [fixed,percent,applied_to]
+        properties:
+          fixed:
+            type: string
+            description: "Fixed amount to pay"
+            example: "1123456"
+            format: Amount
+          percent:
+            type: string
+            description: "Percent to calculate the fee with (e.g., 1.0 represents 100%, 0.21 represents 21%)"
+            example: "234"
+            format: Amount
+          applied_to:
+            type: object
+            $ref: '#/components/schemas/FeeAppliedTo'
+
+Fee:
+  type: object
+  description: |
+                Fee - describes fee happened on balance. Direction of fee depends on the operation (depending on effect might be
+                charged, locked, unlocked, for all incoming effects but unlocked it's always charged)
+  required:
+    - fixed
+    - calculated_percent
+  properties:
+    fixed:
+      type: string
+      format: Amount
+      description: "fixed fee charged for the operation"
+      example: 486000000
+    calculated_percent:
+      type: string
+      format: Amount
+      description: "percent of the operation amount"
+      example: 4000000
+
+
+FeeData:
+  type: object
+  required:
+    - fixed_fee
+    - actual_payment_fee
+    - actual_payment_fee_asset_code
+  properties:
+    fixed_fee:
+      type: string
+      format: Amount
+    actual_payment_fee:
+      type: string
+      format: Amount
+    actual_payment_fee_asset_code:
+      type: string

@@ -1,0 +1,80 @@
+OrderBookEntryKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "BASE84651:QUOTE899:0:f:66110000"
+    type:
+      type: string
+      enum:
+        - "order-book-entries"
+
+OrderBookEntry:
+  allOf:
+    - $ref: '#/components/schemas/OrderBookEntryKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - is_buy
+            - price
+            - base_amount
+            - quote_amount
+            - created_at
+            - cumulative_base_amount
+            - cumulative_quote_amount
+          properties:
+            is_buy:
+              type: boolean
+              description: "defines whether an offer is on buying or selling the base_asset" # FIXME ?
+              example: false
+            price:
+              type: string
+              format: Amount
+              description: "defines the price of an offer"
+              example: "33.050000"
+            base_amount:
+              type: string
+              format: Amount
+              description: "defines the base amount of an offer"
+              example: "33.050000"
+            quote_amount:
+              type: string
+              format: string
+              description: "defines the quote amount of an offer"
+              example: "1092.302500"
+            cumulative_base_amount:
+              type: string
+              format: Amount
+              description: "defines the base amount of current entry plus base amounts of more beneficial entries"
+              example: "59.153000"
+            cumulative_quote_amount:
+              type: string
+              format: string
+              description: "defines the quote amount of current entry plus quote amounts of more beneficial entries"
+              example: "5813.004120"
+            created_at:
+              type: string
+              description: "defines the time when the offer was created"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+        relationships:
+          type: object
+          properties:
+            base_asset:
+              type: object
+              description: "defines the base asset of an offer"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            quote_asset:
+              type: object
+              description: "defines the quote asset of an offer"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'

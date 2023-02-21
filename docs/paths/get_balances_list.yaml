@@ -1,0 +1,106 @@
+/v3/balances:
+  get:
+    tags:
+      - Balances
+    summary: Balance List
+    description: |
+      Allows getting list of balances with corresponding details.
+
+      🔒 Admins signature is needed. If filter by asset is provided, the signature of asset's owner is also valid
+    operationId: getBalanceList
+    parameters:
+      - name: filter[asset]
+        in: query
+        description: |
+          Filters balances by asset. Returns page of balances for the provided asset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[asset_owner]
+        in: query
+        description: |
+          Filters balances by asset owner. Returns page of balances for the provided asset owner
+      - name: filter[owner]
+        in: query
+        description: |
+          Filters balances by owner. Returns page of balances for the provided owner
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[amount_lw_or_eq]
+        in: query
+        description: |
+          Filters balances by amount. Returns page of balances with balance amount lower or equal then provided
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+      - name: filter[amount_gt]
+        in: query
+        description: |
+          Filters balances by amount. Returns page of balances with balance amount greater then provided
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [state, owner]
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: Request is successfull
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Balance'
+                included:
+                  type: array
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/balances?page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/balances?page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

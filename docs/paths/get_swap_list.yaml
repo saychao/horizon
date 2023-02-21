@@ -1,0 +1,118 @@
+/v3/swaps:
+  get:
+    tags:
+      - Swaps
+    summary: Swaps list
+    description: |
+      Allows getting a filtered list of `Swaps` with corresponding details.\n
+      🔒 Depending on the case, different signatures are required:\n
+        1. if no filters are applied, admin signature is required.\n
+        2. if filter by source is applied, signature of source is required\n
+        3. if filter by destination is applied, signature of destination is required\n
+    operationId: getSwaps
+    parameters:
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [source_balance, destination_balance, asset]
+      - name: filter[source]
+        in: query
+        description: |
+          Filters swaps by a specified source's account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[destination]
+        in: query
+        description: |
+          Filters swaps by a specified destination's account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[destination_balance]
+        in: query
+        description: |
+          Filters swaps by a specified destination's balance address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[source_balance]
+        in: query
+        description: |
+          Filters swaps by a specified source's balance address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[state]
+        in: query
+        description: |
+          Filters sales by a specified sale state.
+          Available sale states:
+          * 1 - open
+          * 2 - closed
+          * 3 - cancelled
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: swaps exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Swap'
+                included:
+                  type: array
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/swaps?page[cursor]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/swaps?page[cursor]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

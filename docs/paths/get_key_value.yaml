@@ -1,0 +1,43 @@
+/v3/key_values/{key}:
+  get:
+    tags:
+      - KeyValue
+    summary: KeyValueEntry by ID
+    description: |
+      Allows getting `KeyValueEntry` with corresponding details.
+    operationId: getKeyValueEntryByID
+    parameters:
+    - name: key
+      in: path
+      description: Unique identifier of the key-value entry
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        example: "max_contracts_count"
+    responses:
+      200:
+        description: key-value entry exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  $ref: '#/components/schemas/KeyValueEntry'
+
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: key-value entry does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

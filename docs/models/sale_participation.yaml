@@ -1,0 +1,48 @@
+SaleParticipationKey:
+  type: object
+  required: [type, id]
+  properties:
+    id:
+      type: string
+      description: "ID of sale participation"
+      example: 42
+    type:
+      enum:
+        - "sale-participation"
+
+SaleParticipation:
+  allOf:
+  - $ref: '#/components/schemas/SaleParticipationKey'
+  - type: object
+    required: [attributes, relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          quote_asset:
+            type: object
+            description: "quote asset of the participation"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          base_asset:
+            type: object
+            description: "base asset of the participation"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          participant:
+            type: object
+            description: "participant"
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required: [amount]
+        properties:
+          amount:
+            type: string
+            example: "15.000000"
+            format: Amount
+            description: "defines the amount of participation in quote asset"

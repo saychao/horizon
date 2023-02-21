@@ -1,0 +1,76 @@
+/v3/order_books/{id}:
+  get:
+    tags:
+      - Order Books
+    summary: OrderBook by ID
+    description: |
+                  Returns the list of placed offers without private details.
+    operationId: getOrderBookByID
+    parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the resource, formatted as `base:quote:order_book_id`, where `order_book_id` is `0` for secondary market, sale ID otherwise
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        example: "BTC:ETH:0"
+    - name: max_entries
+      in: query
+      description: |
+         Defines quantity of entries that will be returned in the response
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer
+        format: uint64
+        example: 10
+    - name: include
+      in: query
+      description: |
+                    Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - buy_entries
+          - sell_entries
+          - base_asset
+          - quote_asset
+    responses:
+      200:
+        description: order book exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/OrderBook'
+                included:
+                  type: array
+                  items:
+                    oneOf:
+                    - $ref: '#/components/schemas/OrderBookEntry'
+                    - $ref: '#/components/schemas/Asset'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: order book does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

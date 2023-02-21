@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: Horizon
+  description: |
+    Horizon is the client-facing REST API module that consumes data from the core of the system and makes it more convenient to use the
+    client facing application. It allows submitting transactions to the network,
+    reading history of operations, and checking the state of entities.
+
+    > IMPORTANT: Note that endpoints not specified in this document or marked as `WIP` do not guaranty the backwards compability maintenance.
+
+    ### Overview
+    Horizon uses [JSON:API](https://jsonapi.org/) convention to format requests and responses.
+    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+    and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt>).
+    ### Security
+    TokenD uses the Ed25519 algorithm for authorizing any request or read private data. The use of such cryptographic proof allows building a system where transfer of secrets in an open form is not necessary, which significantly improves the security. Thus, an attacker who has access to one of the servers will not be able to compromise users' secrets.
+
+    Request signature implementation is based on IETF HTTP Signatures draft RFC. Implicit headers parameter is not supported; clients must explicitly specify headers used for signing.
+
+    The signature algorithm supported is ed25519-sha256, which uses public signer key as `keyId`.
+
+    Both Signature and Authorization HTTP authentication schemas are supported.
+
+    The minimum recommended data to sign is the (request-header) and date.
+
+    For the following request:
+
+    ```http
+    GET /users?type=2 HTTP/1.1
+    Host: api.tokend.io
+    Date: Fri, 05 Jan 2018 21:31:40 GMT
+    ```
+
+    Signing string would be:
+
+    ```text
+    date: Fri, 05 Jan 2018 21:31:40 GMT
+    (request-target): get /users?type=2
+    ```
+
+    > Note that header names and HTTP method are lowercased.
+
+    The next step is to convert the signing string to a byte array using `UTF-8` encoding and to take its `SHA-256` hash.
+
+    For the signing string above, hash would be:
+    ```text
+    6fcbee4b0a8932784644d33b360bd3eef389ed37dfd66f17e4bfa910ba9d616a
+    ```
+
+    Now, you have to sign hash with a private key and encode the result in `Base64`. For a seed such as `SCDMOOXVNMO6SA22AYUMZDIGLDJMBUTVEGB73FFNTLFJILBJWIU4NQ3D`, the encoded signature would be:
+
+    ```text
+    w/y3EsliTmQPC6MS88N/kjU/hFVxlIdhFhzfRGv4yIsSokgMpxVqxcC/CmUsAN4t3BKpskGG7+JEWryV8NXvCg==
+    ```
+
+    The result HTTP header included to the request then would be:
+
+
+    ```text
+    Authorization: keyId="GBLTOG6EJS5OWDNQNSCEAVDNMPBY6F73XZHHKR27YE5AKE23ZZEXOLBK",algorithm="ed25519-sha256",signature="w/y3EsliTmQPC6MS88N/kjU/hFVxlIdhFhzfRGv4yIsSokgMpxVqxcC/CmUsAN4t3BKpskGG7+JEWryV8NXvCg==",headers="date (request-target)"
+    ```
+  contact:
+    email: dev@distributedlab.com
+    url: https://tokend.io
+    name: Support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 3.5.1
+  x-logo:
+    url: "https://tokend.io/images/logo.svg"
+    backgroundColor: "transparent"
+    altText: "TokenD"
+servers:
+  - url: https://api.achilles.tokend.io
+    description: TokenD Developer Environment
+# NOTE
+#
+# Add tag to x-tagGroups or it won't be displayed
+tags:
+  - name: Accounts
+    description: Defines access points for accounts and related entities
+  - name: Assets
+    description: Defines access points for assets
+  - name: Fees
+    description: Defines access points for fees
+  - name: Signers
+    description: Defines access points to get signers
+  - name: Account Roles
+    description: Defines access points to get account role
+  - name: Asset Pairs
+    description: |
+      * A base asset refers to the underlying assets giving value to a company, investment or loan.
+      Base asset is not fixed. It will appreciate or depreciate according to market forces.
+      * A quote asset refers to the last amount at which 1 base asset was traded,
+      meaning the most recent price to which a buyer and seller have agreed as well as the price
+      at which some 1 base asset was transacted
+  - name: Order Books
+    description: |
+      An order book is a list of buy and sell orders for a specified asset pair organized by price level.
+      An order book lists the amount of asset being bid or offered at each price point.
+      It does not identify market participants behind buy and sell orders.
+  - name: AMLAlert
+    description: Defines access points to AMLAlert Reviewable Requests
+  - name: Issuance
+    description: Defines access points to get Issuance Reviewable Requests
+  - name: Withdrawal
+    description: Defines access points to get Withdrawal Reviewable Requests
+x-tagGroups:
+  - name: Essentials
+    tags:
+      - Accounts
+      - Assets
+      - Balances
+      - Fees
+  - name: Asset Movements
+    tags:
+      - AMLAlert
+      - Issuance
+      - Withdrawal
+      - Atomic Swap
+      - Swaps
+      - Redemption
+      - DeferredPayments
+  - name: Access Control
+    tags:
+      - Signers
+      - Signer Roles
+      - Signer Rules
+  - name: KYC & AML
+    tags:
+      - Account Roles
+      - Account Rules
+      - Change Account Role Request
+      - AMLAlert
+      - Limits
+      - KYC Recovery
+  - name: Decentralized Exchange
+    tags:
+      - Asset Pairs
+      - Offers
+      - Order Books
+      - Crowd Investing
+      - Matches
+  - name: Advanced
+    tags:
+      - PreIssuance
+      - KeyValue
+      - License
+      - Data
+  - name: Other
+    tags:
+      - Polls
+      - Requests
+      - History
+      - Public Key Entries
+      - Info
+      - Submit
+      - WIP

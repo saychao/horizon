@@ -1,0 +1,69 @@
+/v3/deferred_payments/{id}:
+  get:
+    tags:
+      - DeferredPayments
+    summary: DeferredPayment by ID
+    description: |
+      Allows getting `DeferredPayment` with corresponding details.\n
+      🔒 Admin, deferredPayment source, or deferredPayment destination signature is required \n
+    operationId: getDeferredPayment
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of a deferredPayment
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: filter[destination]
+        in: query
+        description: |
+          Filters deferred_payments by a specified destination's account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[source_balance]
+        in: query
+        description: |
+          Filters deferred_payments by a specified source's balance address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+    responses:
+      200:
+        description: deferredPayment exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/DeferredPayment'
+                included:
+                  type: array
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: deferredPayment does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

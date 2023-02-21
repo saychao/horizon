@@ -1,0 +1,22 @@
+CancelCloseDeferredPaymentRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-cancel-close-deferred-payment-request"
+
+CancelCloseDeferredPaymentRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CancelCloseDeferredPaymentRequestOpKey'
+    - type: object
+      required: [ relationships ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/RequestKey'

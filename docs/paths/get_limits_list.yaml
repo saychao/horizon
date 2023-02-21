@@ -1,0 +1,105 @@
+/v3/limits:
+  get:
+    tags:
+      - Limits
+    summary: Limits List
+    description: |
+      Allows getting a filtered list of `Limits` with corresponding details.
+    operationId: getLimitssList
+    parameters:
+      - name: filter[asset]
+        in: query
+        description: |
+          Filters limits by asset.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[stats_op_type]
+        in: query
+        description: |
+          Filters limits by statsOpType.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+      - name: filter[account]
+        in: query
+        description: |
+          Filters limits by account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[account_role]
+        in: query
+        description: |
+          Filters limits by account role.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - asset
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: limits exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Limits'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    anyOf:
+                      - $ref: '#/components/schemas/Asset'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/limits?include=asset&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/limits?include=asset&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: limits do not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

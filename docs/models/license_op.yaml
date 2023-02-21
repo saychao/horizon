@@ -1,0 +1,52 @@
+LicenseOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-license"
+
+LicenseOp:
+  allOf:
+  - $ref: '#/components/schemas/LicenseOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+        - due_date
+        - admin_count
+        - ledger_hash
+        - prev_license_hash
+        - signatures
+        properties:
+          due_date:
+            type: string
+            description: "End of the licensed period"
+            format: "date-time"
+            example: "2012-11-01T22:08:41+00:00"
+          admin_count:
+            type: integer
+            format: uint64
+            example: 20
+            description: "Allowed number of admins to set"
+          ledger_hash:
+            type: string
+            example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+            description: "Stamped ledger hash"
+          prev_license_hash:
+            type: string
+            example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+            description: "Hash of the previous license"
+          signatures:
+            type: array
+            items:
+              type: string
+              example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+              description: "License signatures"
+
+

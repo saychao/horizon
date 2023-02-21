@@ -1,0 +1,1229 @@
+ReviewableRequestDetailsKey:
+  oneOf:
+    - $ref: '#/components/schemas/CreateAssetRequestKey'
+    - $ref: '#/components/schemas/UpdateAssetRequestKey'
+    - $ref: '#/components/schemas/CreatePreIssuanceRequestKey'
+    - $ref: '#/components/schemas/CreateIssuanceRequestKey'
+    - $ref: '#/components/schemas/CreateWithdrawRequestKey'
+    - $ref: '#/components/schemas/CreateSaleRequestKey'
+    - $ref: '#/components/schemas/UpdateLimitsRequestKey'
+    - $ref: '#/components/schemas/CreateAmlAlertRequestKey'
+    - $ref: '#/components/schemas/ChangeRoleRequestKey'
+    - $ref: '#/components/schemas/UpdateSaleDetailsRequestKey'
+    - $ref: '#/components/schemas/CreateAtomicSwapBidRequestKey'
+    - $ref: '#/components/schemas/CreateAtomicSwapAskRequestKey'
+    - $ref: '#/components/schemas/CreatePollRequestKey'
+    - $ref: '#/components/schemas/KYCRecoveryRequestKey'
+    - $ref: '#/components/schemas/ManageOfferRequestKey'
+    - $ref: '#/components/schemas/CreatePaymentRequestKey'
+    - $ref: '#/components/schemas/RedemptionRequestKey'
+    - $ref: '#/components/schemas/DataCreationRequestKey'
+    - $ref: '#/components/schemas/DataUpdateRequestKey'
+    - $ref: '#/components/schemas/DataRemoveRequestKey'
+    - $ref: '#/components/schemas/CreateDeferredPaymentRequestKey'
+    - $ref: '#/components/schemas/CloseDeferredPaymentRequestKey'
+    - $ref: '#/components/schemas/DataOwnerUpdateRequestKey'
+
+
+ReviewableRequestDetails:
+  oneOf:
+    - $ref: '#/components/schemas/CreateAssetRequest'
+    - $ref: '#/components/schemas/UpdateAssetRequest'
+    - $ref: '#/components/schemas/CreatePreIssuanceRequest'
+    - $ref: '#/components/schemas/CreateIssuanceRequest'
+    - $ref: '#/components/schemas/CreateWithdrawRequest'
+    - $ref: '#/components/schemas/CreateSaleRequest'
+    - $ref: '#/components/schemas/UpdateLimitsRequest'
+    - $ref: '#/components/schemas/CreateAmlAlertRequest'
+    - $ref: '#/components/schemas/ChangeRoleRequest'
+    - $ref: '#/components/schemas/UpdateSaleDetailsRequest'
+    - $ref: '#/components/schemas/CreateAtomicSwapBidRequest'
+    - $ref: '#/components/schemas/CreateAtomicSwapAskRequest'
+    - $ref: '#/components/schemas/CreatePollRequest'
+    - $ref: '#/components/schemas/KYCRecoveryRequest'
+    - $ref: '#/components/schemas/ManageOfferRequest'
+    - $ref: '#/components/schemas/CreatePaymentRequest'
+    - $ref: '#/components/schemas/RedemptionRequest'
+    - $ref: '#/components/schemas/RedemptionRequest'
+    - $ref: '#/components/schemas/DataCreationRequest'
+    - $ref: '#/components/schemas/DataUpdateRequest'
+    - $ref: '#/components/schemas/DataRemoveRequest'
+    - $ref: '#/components/schemas/CreateDeferredPaymentRequest'
+    - $ref: '#/components/schemas/CloseDeferredPaymentRequest'
+    - $ref: '#/components/schemas/DataOwnerUpdateRequest'
+
+
+CreateAssetRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-asset-create"
+
+CreateAssetRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateAssetRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            asset:
+              type: object
+              description: "asset"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - asset
+            - type
+            - policies
+            - pre_issuance_asset_signer
+            - max_issuance_amount
+            - initial_preissued_amount
+            - creator_details
+            - trailing_digits_count
+          properties:
+            asset:
+              type: string
+              description: "Unique asset identifier"
+              example: "USD"
+            type:
+              type: integer
+              format: uint64
+              description: "Numeric type of asset"
+              example: 1
+            policies:
+              type: integer
+              description: "Policies specified for the asset creation"
+              example: 12
+            pre_issuance_asset_signer:
+              type: string
+              description: "Address of an account that performs pre issuance"
+              example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+            max_issuance_amount:
+              type: string
+              description: "Maximal amount to be issued"
+              example: "1000.123456"
+              format: Amount
+            initial_preissued_amount:
+              type: string
+              description: "Amount to be issued automatically right after the asset creation"
+              example: "1000.123456"
+              format: Amount
+            trailing_digits_count:
+              type: integer
+              format: uint32
+              description: "Number of digits after point (comma)"
+              example: 2
+              maximum: 6
+              minimum: 0
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+UpdateAssetRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-asset-update"
+
+UpdateAssetRequest:
+  allOf:
+    - $ref: '#/components/schemas/UpdateAssetRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            asset:
+              description: "asset"
+              $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - policies
+            - creator_details
+          properties:
+            policies:
+              type: integer
+              description: "Policies specified for the asset creation"
+              example: 12
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreatePreIssuanceRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-pre-issuance"
+
+CreatePreIssuanceRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreatePreIssuanceRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            asset:
+              type: object
+              description: "asset which would be pre-issued"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - signature
+            - reference
+            - max_issuance_amount
+            - initial_preissued_amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              description: "Amount to be pre issued"
+              example: "123214.123456"
+              format: Amount
+            signature:
+              type: string
+              description: "Signature of the pre issuance signer"
+              example: "a343e3cbcc72928a571778f77bf2554eb5b72c79ce28bbc9d3325c60c21e5241"
+            reference:
+              type: string
+              description: "Reference on the pre issuance request (since it cannot be submitted more than once)"
+              example: "a343e3cbcc72928a571778f77bf2554eb5b72c79ce28bbc9d3325c60c2123451"
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateIssuanceRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-issuance"
+
+CreateIssuanceRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateIssuanceRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            asset:
+              type: object
+              description: "Asset"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            receiver:
+              type: object
+              description: "Balance id that will receive the issued amount"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+        attributes:
+          type: object
+          required:
+            - creator_details
+            - amount
+          properties:
+            amount:
+              type: string
+              description: "Amount to be issued"
+              example: "1000.123456"
+              format: Amount
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateWithdrawRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-withdrawal"
+
+CreateWithdrawRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateWithdrawRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            balance:
+              type: object
+              description: "Balance id to withdraw from"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+            asset:
+              type: object
+              description: "Withdrawn asset"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - fee
+            - amount
+            - creator_details
+            - reviewer_details
+          properties:
+            amount:
+              type: string
+              description: "Amount to be issued"
+              example: "1000.123456"
+              format: Amount
+            fee:
+              $ref: '#/components/schemas/Fee'
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateSaleRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-sale"
+
+CreateSaleRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateSaleRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            base_asset:
+              type: object
+              description: "Asset to be sold"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            default_quote_asset:
+              type: object
+              description: "Default quote asset for sale"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            quote_assets:
+              description: "Sale quote assets specified on creation"
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - access_definition_type
+            - base_asset_for_hard_cap
+            - start_time
+            - end_time
+            - sale_type
+            - creator_details
+            - soft_cap
+            - hard_cap
+          properties:
+            access_definition_type:
+              type: string
+              format: SaleAccessDefinitionType
+              minimum: 1
+              maximum: 3
+              description: |
+                indicates access definition type of the sale
+                * 0 - none
+                * 1 - whitelist
+                * 2 - blacklist
+            base_asset_for_hard_cap:
+              type: string
+              description: "Maximum amount of base asset to be sold"
+              example: "1000.123456"
+              format: Amount
+            soft_cap:
+              type: string
+              format: Amount
+              example: "123.678902"
+              description: "Minimal amount in base asset for sale to reach to be considered successful"
+            hard_cap:
+              type: string
+              format: Amount
+              example: "123.678901"
+              description: "Maximal amount in base asset to be sold on sale"
+            start_time:
+              type: string
+              description: "Time when a sale should start"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            end_time:
+              type: string
+              description: "Time when a sale should end"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            sale_type:
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+              format: xdr.SaleType
+              minimum: 1
+              maximum: 3
+              example: 2
+              description: |
+                Defines sale type:
+                * 1 - **basic sale**
+                * 2 - **crowdfunding** sale
+                * 3 - **fixed price** sale
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+UpdateLimitsRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-limits-update"
+
+UpdateLimitsRequest:
+  allOf:
+    - $ref: '#/components/schemas/UpdateLimitsRequestKey'
+    - type: object
+      required: [ attributes ]
+      properties:
+        attributes:
+          type: object
+          required:
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateAmlAlertRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-aml-alert"
+
+CreateAmlAlertRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateAmlAlertRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            balance:
+              type: object
+              description: "Balance"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              description: "Amount"
+              example: "1000.123456"
+              format: Amount
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+RedemptionRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-redemption"
+
+RedemptionRequest:
+  allOf:
+    - $ref: '#/components/schemas/RedemptionRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          required:
+            - source_balance
+            - destination
+          properties:
+            source_balance:
+              type: object
+              description: "balance to charge funds from (current holder's balance)"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+            destination:
+              type: object
+              description: "account to fund assets on request approval"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              description: "Amount"
+              example: "1000.123456"
+              format: Amount
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+ChangeRoleRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-change-role"
+
+ChangeRoleRequest:
+  allOf:
+    - $ref: '#/components/schemas/ChangeRoleRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          required:
+            - destination_account
+          properties:
+            account_to_update_role:
+              type: object
+              description: "Target account whose role is to be changed"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - account_role_to_set
+            - sequence_number
+            - creator_details
+          properties:
+            account_role_to_set:
+              type: integer
+              format: uint64
+              minimum: 1
+              maximum: 10
+              description: |
+              example: 1
+            sequence_number:
+              type: integer
+              format: uint32
+              description: "Sequence number"
+              example: 10
+            creator_details:
+              description: "free-form object to attach details to the reviewable request"
+              $ref: '#/components/schemas/Details'
+
+UpdateSaleDetailsRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-update-sale-details"
+
+UpdateSaleDetailsRequest:
+  allOf:
+    - $ref: '#/components/schemas/UpdateSaleDetailsRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            sale:
+              type: object
+              description: "Sale which details should be updated"
+              properties:
+                data:
+                  $ref: '#/components/schemas/SaleKey'
+        attributes:
+          type: object
+          required:
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'
+              description: "New details to set for sale"
+
+CreateAtomicSwapAskRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-atomic-swap-ask"
+
+CreateAtomicSwapAskRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateAtomicSwapAskRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            base_balance:
+              type: object
+              description: "Base balance for ask"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+            quote_assets:
+              description: "Assets that can be accepted"
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - creator_details
+            - base_amount
+          properties:
+            base_amount:
+              type: string
+              description: "Amount of ask"
+              example: "100.000001"
+              format: Amount
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateAtomicSwapBidRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-atomic-swap-bid"
+
+CreateAtomicSwapBidRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateAtomicSwapBidRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            ask:
+              type: object
+              description: "Ask to create atomic swap for"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AtomicSwapAskKey'
+            quote_asset:
+              description: "Asset used to perform atomic swap"
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/QuoteAssetKey'
+        attributes:
+          type: object
+          required:
+            - base_amount
+            - creator_details
+          properties:
+            base_amount:
+              type: string
+              description: "Amount in base asset to perform atomic swap on"
+              example: "100.000001"
+              format: Amount
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreatePollRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-create-poll"
+
+CreatePollRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreatePollRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            result_provider:
+              type: object
+              description: "account that is able to finish the poll or confirm votes."
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required: [ permission_type, number_of_choices, start_time, end_time, vote_confirmation_required, poll_data, creator_details ]
+          properties:
+            permission_type:
+              type: int
+              format: uint32
+              example: 4
+              description: "is used to restrict using of poll through rules"
+            number_of_choices:
+              type: integer
+              format: uint32
+              example: 2
+              description: "count of allowed choices"
+            start_time:
+              type: string
+              format: date-time
+              example: "2012-11-01T22:08:41Z"
+              description: "the date from which voting in the poll will be allowed"
+            end_time:
+              type: string
+              format: date-time
+              example: "2012-11-01T22:08:41Z"
+              description: "the date until which voting in the poll will be allowed"
+            vote_confirmation_required:
+              type: boolean
+              example: true
+              description: "defines if result provider is required to participate in poll voting"
+            poll_data:
+              $ref: '#/components/schemas/PollData'
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+KYCRecoveryRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-kyc-recovery"
+
+KYCRecoveryRequest:
+  allOf:
+    - $ref: '#/components/schemas/KYCRecoveryRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            target_account:
+              type: object
+              description: "account to recover"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required: [ sequence_number, signers_data, creator_details ]
+          properties:
+            sequence_number:
+              type: int
+              format: uint32
+              example: 4
+              description: "Sequence number"
+            signers_data:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateSignerData'
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreatePaymentRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-create-payment"
+
+CreatePaymentRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreatePaymentRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            balance_from:
+              $ref: '#/components/schemas/BalanceKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - source_fee
+            - destination_fee
+            - source_pay_for_destination
+            - subject
+            - reference
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            source_fee:
+              $ref: '#/components/schemas/Fee'
+            destination_fee:
+              $ref: '#/components/schemas/Fee'
+            source_pay_for_destination:
+              type: boolean
+              example: true
+              description: "Whether source of the payment should pay destination fee"
+            amount:
+              type: string
+              format: Amount
+              example: "13.123956"
+            reference:
+              type: string
+              description: "Reference for the payment"
+            subject:
+              type: string
+              example: "Dividends"
+              description: "Subject of the payment"
+
+ManageOfferRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-manage-offer"
+
+ManageOfferRequest:
+  allOf:
+    - $ref: '#/components/schemas/ManageOfferRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        attributes:
+          type: object
+          required:
+            - offer_id
+            - order_book_id
+            - base_amount
+            - price
+            - is_buy
+            - fee
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            offer_id:
+              type: integer
+              format: int64
+              description: "ID of the offer to manage"
+              example: 1
+            order_book_id:
+              type: integer
+              format: int64
+              description: "ID of the order book"
+              example: 0
+            base_amount:
+              type: string
+              format: Amount
+              example: "1000.0"
+            price:
+              type: string
+              format: Amount
+              example: "12.3"
+            is_buy:
+              type: boolean
+              description: "Offer direction"
+            fee:
+              $ref: '#/components/schemas/Fee'
+
+
+DataCreationRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-data-creation"
+
+DataCreationRequest:
+  allOf:
+    - $ref: '#/components/schemas/DataCreationRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            owner:
+              type: object
+              description: "owner of the data"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - value
+            - type
+            - creator_details
+            - sequence_number
+          properties:
+            sequence_number:
+              type: integer
+              format: uint32
+              description: "Sequence number"
+              example: 10
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            type:
+              type: integer
+              format: uint64
+            value:
+              $ref: '#/components/schemas/Details'
+
+DataUpdateRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-data-update"
+
+DataUpdateRequest:
+  allOf:
+    - $ref: '#/components/schemas/DataUpdateRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            data:
+              type: object
+              description: "data to update"
+              $ref: '#/components/schemas/DataKey'
+        attributes:
+          type: object
+          required:
+            - value
+            - sequence_number
+            - creator_details
+          properties:
+            sequence_number:
+              type: integer
+              format: uint32
+              description: "Sequence number"
+              example: 10
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            value:
+              $ref: '#/components/schemas/Details'
+
+
+DataRemoveRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-data-remove"
+
+
+
+DataRemoveRequest:
+  allOf:
+    - $ref: '#/components/schemas/DataRemoveRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            data:
+              type: object
+              description: "data to remove"
+              $ref: '#/components/schemas/DataKey'
+        attributes:
+          type: object
+          required:
+            - sequence_number
+            - creator_details
+          properties:
+            sequence_number:
+              type: integer
+              format: uint32
+              description: "Sequence number"
+              example: 10
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CloseDeferredPaymentRequestKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "request-details-close-deferred-payment"
+
+
+CloseDeferredPaymentRequest:
+  allOf:
+    - $ref: '#/components/schemas/CloseDeferredPaymentRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            destination_balance:
+              type: object
+              $ref: '#/components/schemas/BalanceKey'
+            destination_account:
+              type: object
+              $ref: '#/components/schemas/AccountKey'
+            deferred_payment:
+              type: object
+              $ref: '#/components/schemas/DeferredPaymentKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+CreateDeferredPaymentRequestKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "request-details-create-deferred-payment"
+
+
+CreateDeferredPaymentRequest:
+  allOf:
+    - $ref: '#/components/schemas/CreateDeferredPaymentRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            source_balance:
+              type: object
+              $ref: '#/components/schemas/BalanceKey'
+            destination_account:
+              type: object
+              $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+DataOwnerUpdateRequestKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "request-details-data-owner-update"
+
+DataOwnerUpdateRequest:
+  allOf:
+    - $ref: '#/components/schemas/DataOwnerUpdateRequestKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            data:
+              type: object
+              description: "data to update owner"
+              $ref: '#/components/schemas/DataKey'
+            new_owner:
+              $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'

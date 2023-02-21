@@ -1,0 +1,78 @@
+/v3/votes/{voter}:
+  get:
+    tags:
+      - Polls
+    summary: Votes of specific voter
+    description: |
+      Allows getting a filtered list of `Votes` with corresponding details.\n
+      🔒 Admin or voter signature is required.\n
+    operationId: getVoterVotes
+    parameters:
+      - name: voter
+        in: path
+        description: address of voter account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "GA67BUDBYDGCVCL6EKPDAREG5IPLHSROF6QJX7MLS2BQJZJDO6FCZAKE"
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+          * `polls` will include all the polls related to votes
+          * `account` will include voter account
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [polls, account]
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: votes exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Vote'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/Poll'
+                      - $res: '#/components/schemas/Account'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/votes/GA67BUDBYDGCVCL6EKPDAREG5IPLHSROF6QJX7MLS2BQJZJDO6FCZAKE?page[cursor]=22312312&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/votes/GA67BUDBYDGCVCL6EKPDAREG5IPLHSROF6QJX7MLS2BQJZJDO6FCZAKE?page[cursor]=12313123&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

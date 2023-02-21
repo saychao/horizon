@@ -1,0 +1,43 @@
+/v3/signer_rules/{id}:
+  get:
+    tags:
+      - Signer Rules
+    summary: Signer Rule by ID
+    description: |
+                  Allows getting `Signer Rule` with corresponding details.
+    operationId: getSignerRuleByID
+    parameters:
+    - name: id
+      in: path
+      description: Unique identifier of the signer rule
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    responses:
+      200:
+        description: signer rule exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data: 
+                  type: object
+                  $ref: '#/components/schemas/SignerRule'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: signer rule does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

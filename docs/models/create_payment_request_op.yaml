@@ -1,0 +1,59 @@
+CreatePaymentRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "1245"
+    type:
+      type: string
+      enum:
+        - "operations-create-payment-request"
+
+CreatePaymentRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CreatePaymentRequestOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/RequestKey'
+            account_from:
+              $ref: '#/components/schemas/AccountKey'
+            balance_from:
+              $ref: '#/components/schemas/BalanceKey'
+
+        attributes:
+          type: object
+          required:
+            - amount
+            - source_fee
+            - destination_fee
+            - source_pay_for_destination
+            - subject
+            - reference
+            - creator_details
+          properties:
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            source_fee:
+              $ref: '#/components/schemas/Fee'
+            destination_fee:
+              $ref: '#/components/schemas/Fee'
+            source_pay_for_destination:
+              type: boolean
+              example: true
+              description: "Whether source of the payment should pay destination fee"
+            amount:
+              type: string
+              format: Amount
+              example: "13.123457"
+            reference:
+              type: string
+              description: "Reference for the payment"
+            subject:
+              type: string
+              example: "Dividends"
+              description: "Subject of the payment"

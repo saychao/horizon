@@ -1,0 +1,164 @@
+/v3/transactions:
+  post:
+    tags:
+      - Submit
+    summary: Submit transaction
+    description: |
+      Allows to submit transaction to the network
+    operationId: submitTransaction
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SubmitTransactionBody'
+    responses:
+      200:
+        description: successfully submitted
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Transaction'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      408:
+        description: request has timed out
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      500:
+        description: internal server error
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+  get:
+    tags:
+      - History
+    summary: Get transactions
+    description: |
+      Allows to get a filtered list of transactionsa\n
+      🔒 Admin account's signature is required.\n
+    operationId: getTransactions
+    parameters:
+      - name: filter[ledger_entry_changes.entry_types]
+        in: query
+        description: |
+          Filters transactions by ledger entry type they affected (comma-separated multiple values are supported):
+          * 2  - `account`
+          * 3  - `signer`
+          * 4  - `fee`
+          * 5  - `balance`
+          * 6  - `payment_request`
+          * 7  - `asset`
+          * 8  - `reference_entry`
+          * 9  - `statistics`
+          * 10 - `trust`
+          * 11 - `account_limits`
+          * 12 - `asset_pair`
+          * 13 - `offer_entry`
+          * 15 - `reviewable_request`
+          * 16 - `external_system_account_id`
+          * 17 - `sale`
+          * 18 - `account_kyc`
+          * 19 - `external_system_account_id_pool_entry`
+          * 20 - `key_value`
+          * 22 - `limits_v2`
+          * 23 - `statistics_v2`
+          * 24 - `pending_statistics`
+          * 25 - `contract`
+          * 26 - `account_role`
+          * 27 - `account_rule`
+          * 28 - `atomic_swap_bid`
+          * 29 - `transaction`
+          * 30 - `signer_rule`
+          * 31 - `signer_role`
+          * 32 - `stamp`
+          * 33 - `license`
+          * 34 - `poll`
+          * 35 - `vote`
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          minimum: 2
+          maximum: 35
+      - name: filter[ledger_entry_changes.change_types]
+        in: query
+        description: |
+          description: |
+           Filters transactions by ledger entry change type they performed (comma-separated multiple values are supported):
+           * 0 - `created`
+           * 1 - `updated`
+           * 2 - `removed`
+           * 3 - `state`
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 3
+      - name: include
+        in: query
+        description: |
+          Relationships may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - "ledger_entry_changes"
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: transactions exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Transaction'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LedgerEntryChange'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/transactions?include=ledger_entry_changes&page[cursor]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/transactions?include=ledger_entry_changes&page[cursor]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

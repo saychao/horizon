@@ -1,0 +1,86 @@
+ExternalSystemIDKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "1"
+    type:
+      type: string
+      enum:
+        - "external-system-ids"
+
+ExternalSystemID:
+  allOf:
+    - $ref: '#/components/schemas/ExternalSystemIDKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          required:
+            - account
+          properties:
+            account:
+              type: object
+              description: "specifies an account to which this external system ID is binded"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - external_system_type
+            - data
+            - is_deleted
+            - expires_at
+            - binded_at
+          properties:
+            external_system_type:
+              type: integer
+              format: int32
+              description: "type of the external system"
+              example: 1
+            data:
+              $ref: '#/components/schemas/ExternalSystemData'
+            is_deleted:
+              type: boolean
+              description: "if true, this external system ID will not be released back to bool after the expiration but will rather be removed"
+              example: false
+            expires_at:
+              type: string
+              description: "this ID can be binded to another account in the system after the expiration time"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            binded_at:
+              type: string
+              description: "the time when the external system ID was binded"
+              example: "2012-10-30T22:08:41+00:00"
+              format: "date-time"
+
+ExternalSystemDataEntry:
+  type: object
+  x-go-scan-value: true
+  required: [address]
+  properties:
+    address:
+      type: string
+    payload:
+      type: string
+
+ExternalSystemData:
+  type: object
+  x-go-scan-value: true
+  required: [type, data]
+  properties:
+    type:
+      type: string
+      format: ExternalDataType
+      description: |
+        Possible values:
+        * address
+        * address_with_payload
+    data:
+      $ref: '#/components/schemas/ExternalSystemDataEntry'

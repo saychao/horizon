@@ -1,0 +1,15 @@
+Mask:
+  type: object
+  description: "Represents a bit mask"
+  properties:
+    value:
+      type: integer
+      description: "bit mask"
+      format: int32
+      example: 4
+    flags:
+      type: array
+      items:
+        description: "flag of the bit mask"
+        allOf:
+          - $ref: '#/components/schemas/Enum'

@@ -1,0 +1,39 @@
+CreateChangeRoleRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-change-role-request"
+
+CreateChangeRoleRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateChangeRoleRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          request:
+            $ref: '#/components/schemas/RequestKey'
+          account_to_update_role:
+            $ref: '#/components/schemas/AccountKey'
+          role_to_set:
+            $ref: '#/components/schemas/AccountRoleKey'
+      attributes:
+        type: object
+        required:
+          - creator_details
+        properties:
+          creator_details:
+            $ref: '#/components/schemas/Details'
+          all_tasks:
+            type: integer
+            format: uint32
+            nullable: true
+            description: "Tasks for the request"
+            example: 12

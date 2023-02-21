@@ -1,0 +1,48 @@
+/v3/key_values:
+  get:
+    tags:
+      - KeyValue
+    summary: KeyValueEntry List
+    description: |
+      Allows getting `KeyValueEntry` with corresponding details.
+    operationId: getKeyValueList
+    parameters:
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: KeyValue entries exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/KeyValueEntry'
+                included:
+                  type: array
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/key_values?page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/key_values?page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

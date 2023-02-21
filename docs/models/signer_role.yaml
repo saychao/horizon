@@ -1,0 +1,44 @@
+SignerRoleKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "4581"
+      type:
+        type: string
+        enum: 
+          - "signer-roles"
+SignerRole:
+  allOf:
+  - $ref: '#/components/schemas/SignerRoleKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          rules:
+            description: "Rules applied to the role"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SignerRuleKey'
+          owner:
+            description: "Owner of the role"
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required: [details]
+        properties:
+          details:
+            $ref: '#/components/schemas/Details'
+            description: "free-form object to attach details to the role"

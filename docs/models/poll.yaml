@@ -1,0 +1,122 @@
+PollKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "10"
+    type:
+      type: string
+      enum:
+        - "polls"
+PollParticipationKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "10"
+    type:
+      type: string
+      enum:
+        - "poll-outcome"
+
+PollData:
+  type: object
+  required: [type]
+  properties:
+    type:
+      format: xdr.PollType
+      description: |
+        * 0: "single_choice"
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+
+Poll:
+  allOf:
+    - $ref: '#/components/schemas/PollKey'
+    - type: object
+      x-go-scan-value: true
+      required: [relationships, attributes]
+      properties:
+        id:
+          type: string
+          example: "10"
+        type:
+          type: string
+          enum:
+            - "polls"
+        relationships:
+          type: object
+          properties:
+            result_provider:
+              type: object
+              description: "account that is able to finish the poll or confirm votes"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+            owner:
+              type: object
+              description: "account that created the poll"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+            participation:
+              type: object
+              description: "poll outcome"
+              properties:
+                data:
+                  $ref: '#/components/schemas/PollParticipationKey'
+        attributes:
+          type: object
+          required: [permission_type, number_of_choices, start_time, end_time, vote_confirmation_required, poll_state, poll_data, creator_details]
+          properties:
+            permission_type:
+              type: integer
+              format: uint32
+              example: 4
+              description: "is used to restrict using of poll through rules"
+            number_of_choices:
+              type: integer
+              format: uint32
+              example: 2
+              description: "count of allowed choices"
+            start_time:
+              type: string
+              format: date-time
+              example: "2012-11-01T22:08:41Z"
+              description: "the date from which voting in the poll will be allowed"
+            end_time:
+              type: string
+              format: date-time
+              example: "2012-11-01T22:08:41Z"
+              description: "the date until which voting in the poll will be allowed"
+            vote_confirmation_required:
+              type: boolean
+              example: true
+              description: "defines if result provider is required to participate in poll voting"
+            poll_state:
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+              format: PollState
+              description: |
+                * 1 - open
+                * 2 - passed
+                * 3 - failed
+                * 4 - cancelled
+            poll_data:
+              $ref: '#/components/schemas/PollData'
+            creator_details:
+              $ref: '#/components/schemas/Details'
+
+PollParticipation:
+  allOf:
+    - $ref: '#/components/schemas/PollParticipationKey'
+    - type: object
+      required: [relationships]
+      properties:
+        relationships:
+          type: object
+          properties:
+            votes:
+              type: array
+              items:
+                $ref: '#/components/schemas/VoteKey'

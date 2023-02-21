@@ -1,0 +1,41 @@
+CreateKYCRecoveryRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-kyc-recovery-request"
+
+CreateKYCRecoveryRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateKYCRecoveryRequestOpKey'
+  - type: object
+    properties:
+      relationships:
+        type: object
+        properties:
+          target_account:
+            $ref: '#/components/schemas/AccountKey'
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - signers_data
+          - creator_details
+        properties:
+          signers_data:
+            type: array
+            items:
+              $ref: '#/components/schemas/UpdateSignerData'
+          all_tasks:
+            type: integer
+            format: uint32
+            description: tasks set on request creation
+            example: 2
+            nullable: true
+          creator_details:
+            $ref: '#/components/schemas/Details'

@@ -1,0 +1,79 @@
+/v3/close_deferred_payment_requests/{id}:
+  get:
+    tags:
+      - DeferredPayments
+    summary: CloseDeferredPayment Request by ID
+    description: |
+      Allows getting a filtered list of `CloseDeferredPayment` with details\n
+      🔒 Requestor's or reviewer's signature is needed
+    operationId: getCloseDeferredPaymentRequests
+    parameters:
+      - name: id
+        in: path
+        required: true
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - "request_details"
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: requests exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - deferredPayment
+                - included
+              properties:
+                deferredPayment:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/ReviewableRequest'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    anyOf:
+                      - $ref: '#/components/schemas/CloseDeferredPaymentRequest'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/close_deferred_payment_requests?include=details&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/close_deferred_payment_requests?include=details&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: requests do not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

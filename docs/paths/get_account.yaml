@@ -1,0 +1,96 @@
+/v3/accounts/{id}:
+  get:
+    tags:
+      - Accounts
+    summary: Account by ID
+    description: |
+                  Allows getting `Account` with corresponding details.\n
+                  Note that if we include `fees` filter - we will receive all the fees applied to a particular account.\n
+                  For example if someone's, say Bob, account has a several fees applied to itself:
+                    * first fee applied globally for all accounts for payments of amount from 0 to 100 `BTC` and is 1% from the payment
+                    * second fee applied exactly to Bob's account and is 2% of the payment of amounts from 100 to 200 `BTC`\n
+                  then we will receive both of them in response because they are applied to Bob's account
+    operationId: getAccountByID
+    parameters:
+    - name: id
+      in: path
+      description: Unique identifier of an account
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: include
+      in: query
+      description: |
+        🔒 Following relationships require an owner's or admin's signature to be included:
+        * `balances.state`
+        * `referrer`
+        * `fees`
+        * `role`
+        * `role.rules`
+        * `limits`
+        * `external_system_ids`
+        * `kyc_data`
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - fees
+          - balances
+          - balances.asset
+          - balances.state
+          - referrer
+          - limits
+          - external_system_ids
+          - role
+          - role.rules
+          - kyc_data
+        example: balances,balances.asset
+    responses:
+      200:
+        description: account exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data: 
+                  type: object
+                  $ref: '#/components/schemas/Account'
+                included:
+                  type: array
+                  items:
+                    oneOf:
+                    - $ref: '#/components/schemas/Account'
+                    - $ref: '#/components/schemas/BalanceState'
+                    - $ref: '#/components/schemas/Fee'
+                    - $ref: '#/components/schemas/ExternalSystemID'
+                    - $ref: '#/components/schemas/Limits'
+                    - $ref: '#/components/schemas/AccountRole'
+                    - $ref: '#/components/schemas/AccountRule'
+                    - $ref: '#/components/schemas/AccountKYC'
+
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: such an account does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

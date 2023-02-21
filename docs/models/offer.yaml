@@ -1,0 +1,95 @@
+OfferKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "10"
+    type:
+      type: string
+      enum:
+        - "offers"
+
+Offer:
+  allOf:
+  - $ref: '#/components/schemas/OfferKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - is_buy
+          - order_book_id
+          - created_at
+          - base_amount
+          - quote_amount
+          - price
+          - fee
+        properties:
+          is_buy:
+            type: boolean
+            description: "defines whether an offer created is on buying or selling the base_asset, or both"
+            example: true
+          order_book_id:
+            type: string
+            format: int64
+            description: "defines whether an offer created is on selling or trading. Could be either `0` (secondary market) or some `saleId` (for specific sale) or `-1`" # todo provide a list of order book IDs
+            example: "1"
+          created_at:
+            type: string
+            description: "defines the time when the offer was created"
+            format: "date-time"
+            example: "2012-11-01T22:08:41+00:00"
+          base_amount:
+            type: string
+            example: "5.000000"
+            format: Amount
+            description: "defines the amount of offer in the base asset"
+          quote_amount:
+            type: string
+            example: "15.000000"
+            format: Amount
+            description: "defines the amount of offer in the quote asset"
+          price:
+            type: string
+            example: "3.000000"
+            format: Amount
+            description: "defines the price of an offer"
+          fee:
+            $ref: '#/components/schemas/Fee'
+      relationships:
+        type: object
+        properties:
+          owner:
+            type: object
+            description: "defines an owner of the requested offer"
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'
+          base_asset:
+            type: object
+            description: "defines the base asset of the requested offer"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          quote_asset:
+            type: object
+            description: "defines the quote asset of the requested offer"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          base_balance:
+            type: object
+            description: "defines the base balance of the requested offer"
+            properties:
+              data:
+                $ref: '#/components/schemas/BalanceKey'
+          quote_balance:
+            type: object
+            description: "defines the quote balance of the requested offer"
+            properties:
+              data:
+                $ref: '#/components/schemas/BalanceKey'

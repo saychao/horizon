@@ -1,0 +1,74 @@
+SwapKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "swaps"
+
+Swap:
+  allOf:
+    - $ref: '#/components/schemas/SwapKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required: [created_at, lock_time, state, details, secret_hash, amount, source_fee, destination_fee]
+          properties:
+            created_at:
+              type: string
+              description: "time when the swap was created"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            lock_time:
+              type: string
+              description: "time when the swap expires"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"
+            state:
+              type: integer
+              format: SwapState
+              minimum: 1
+              maximum: 3
+              description: |
+                * 0 - "open"
+                * 1 - "closed"
+                * 2 - "cancelled"
+              example: 2
+            secret_hash:
+              type: string
+              description: "Hash of the swap secret in hexadecimal format"
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            source_fee:
+              $ref: '#/components/schemas/Fee'
+            destination_fee:
+              $ref: '#/components/schemas/Fee'
+            details:
+              $ref: '#/components/schemas/Details'
+              description: "free-form object to attach details to the swap"
+            secret:
+              type: string
+              description: "secret of the swap in hexadecimal format"
+        relationships:
+          type: object
+          properties:
+            source:
+              $ref: '#/components/schemas/AccountKey'
+            destination:
+              $ref: '#/components/schemas/AccountKey'
+            source_balance:
+              $ref: '#/components/schemas/BalanceKey'
+            destination_balance:
+              $ref: '#/components/schemas/BalanceKey'
+            asset:
+              $ref: '#/components/schemas/AssetKey'

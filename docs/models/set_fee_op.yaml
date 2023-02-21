@@ -1,0 +1,80 @@
+SetFeeOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-set-fees"
+
+SetFeeOp:
+  allOf:
+  - $ref: '#/components/schemas/SetFeeOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - asset_code
+          - fixed_fee
+          - percent_fee
+          - fee_type
+          - subtype
+          - lower_bound
+          - upper_bound
+          - is_delete
+        properties:
+          asset_code:
+            type: string
+            description: "Unique identifier of the asset"
+            example: "USD"
+          fixed_fee:
+            type: string
+            format: Amount
+            description: "Fixed amount to pay"
+            example: "2.5"
+          percent_fee:
+            type: string
+            format: Amount
+            description: "Percent to pay"
+            example: "2"
+          fee_type:
+            format: xdr.FeeType
+            description: |
+              * 0: "payment_fee"
+              * 1: "offer_fee"
+              * 2: "withdrawal_fee"
+              * 3: "issuance_fee"
+              * 4: "invest_fee"
+              * 5: "capital_deployment_fee"
+              * 6: "operation_fee"
+              * 7: "payout_fee"
+              * 8: "atomic_swap_sale_fee"
+              * 9: "atomic_swap_purchase_fee"
+            allOf:
+            - $ref: '#/components/schemas/Enum'
+          account_address:
+            type: string
+            example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+          account_role:
+            type: integer
+            format: xdr.Uint64
+            example: 2
+          subtype:
+            type: integer
+            format: int64
+            description: "Subtype of the fee"
+            example: 0
+          lower_bound:
+            type: string
+            format: Amount
+            description: "Lower bound of fee applicability"
+          upper_bound:
+            type: string
+            format: Amount
+            description: "Upper bound of fee applicability"
+          is_delete:
+            type: boolean

@@ -1,0 +1,39 @@
+CreateRedemptionRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "1245"
+    type:
+      type: string
+      enum:
+        - "operations-create-redemption-request"
+
+CreateRedemptionRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CreateRedemptionRequestOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/RequestKey'
+            balance_from:
+              $ref: '#/components/schemas/BalanceKey'
+            account_to:
+              $ref: '#/components/schemas/AccountKey'
+
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              format: Amount
+              example: "13.123457"
+            creator_details:
+              $ref: '#/components/schemas/Details'

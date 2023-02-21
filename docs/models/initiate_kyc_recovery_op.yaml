@@ -1,0 +1,30 @@
+InitiateKYCRecoveryOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-initiate-kyc-recovery"
+
+InitiateKYCRecoveryOp:
+  allOf:
+  - $ref: '#/components/schemas/InitiateKYCRecoveryOpKey'
+  - type: object
+    properties:
+      relationships:
+        type: object
+        properties:
+          account:
+            $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required:
+          - signer
+        properties:
+          signer:
+            type: string
+            example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+            description: "Signer to set instead of existing ones"

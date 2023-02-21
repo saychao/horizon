@@ -1,0 +1,68 @@
+/v3/offers/{id}:
+  get:
+    tags:
+      - Offers
+    summary: Offer by ID
+    description: |
+                  Allows getting `Offer` with corresponding details.\n
+                  🔒 An owner's or admin's signature is needed to get the data from this endpoint.
+    operationId: getOfferByID
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of an offer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: include
+        in: query
+        description: |
+                      Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - base_asset
+            - quote_asset
+    responses:
+      200:
+        description: offer exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Offer'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Asset'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: offer does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

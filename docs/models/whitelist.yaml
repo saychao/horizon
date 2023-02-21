@@ -1,0 +1,30 @@
+SaleWhitelistKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        description: "Unique identifier of whitelist rule"
+        example: "1"
+      type:
+        type: string
+        enum:
+        - "sale-whitelist"
+
+SaleWhitelist:
+  allOf:
+  - $ref: '#/components/schemas/SaleWhitelistKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          participant:
+            type: object
+            description: "whitelisted account"
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'

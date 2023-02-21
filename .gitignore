@@ -1,0 +1,6 @@
+/.idea
+/_vendor-*
+/bin/*
+config.*.yaml
+.vscode/
+.DS_Store

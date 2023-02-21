@@ -1,0 +1,103 @@
+/v3/order_book/{id}:
+  get:
+    deprecated: true
+    tags:
+      - Order Books
+    summary: OrderBook by ID
+    description: |
+                  Returns the list of placed offers without private details.
+    operationId: getOrderBookByIDDeprecated
+    parameters:
+    - name: id
+      in: path
+      description: "ID of an order book: 0 for the secondary market and sale ID otherwise"
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        format: int64
+        example: 0
+    - name: base_asset
+      in: query
+      description: Base asset of requested offers
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: valid assetCode
+        example: "BTC"
+    - name: quote_asset
+      in: query
+      description: Quote asset of requested offers
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: valid assetCode
+        example: "ETH"
+    - name: is_buy
+      in: query
+      description: Defines whether an offer is on buying or selling the `base_asset`
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: number
+    - name: include
+      in: query
+      description: |
+                    Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - base_asset
+          - quote_asset
+    responses:
+      200:
+        description: order book exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrderBookEntry'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Asset'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/order_book/0?include=base_asset&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/order_book/0?include=base_asset&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: order book does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

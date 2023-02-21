@@ -1,0 +1,66 @@
+ManageVoteOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-manage-vote"
+
+ManageVoteOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageVoteOpKey'
+  - type: object
+    required: [attributes, relationships]
+    properties:
+      relationships:
+        type: object
+        nullable: true
+        properties:
+          poll:
+            $ref: '#/components/schemas/PollKey'
+          voter:
+            $ref: '#/components/schemas/AccountKey'
+          result_provider:
+            $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required: [action]
+        properties:
+          action:
+            format: xdr.ManageVoteAction
+            description: |
+               * 0 - create
+               * 1 - remove
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+          create:
+            $ref: '#/components/schemas/CreateVoteOp'
+          remove:
+            $ref: '#/components/schemas/RemoveVoteOp'
+
+
+
+CreateVoteOp:
+  type: object
+  required: [poll_id, vote_data]
+  properties:
+    poll_id:
+      type: integer
+      format: int64
+      description: "id of the poll to vote in"
+      example: 1
+    vote_data:
+      $ref: '#/components/schemas/VoteData'
+
+RemoveVoteOp:
+  type: object
+  required: [poll_id]
+  properties:
+    poll_id:
+      type: integer
+      format: int64
+      description: "id of the poll to remove vote from"
+      example: 1

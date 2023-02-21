@@ -1,0 +1,39 @@
+CreateAmlAlertRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-aml-alert"
+
+
+CreateAmlAlertRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateAmlAlertRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          balance:
+            $ref: '#/components/schemas/BalanceKey'
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - amount
+          - creator_details
+        properties:
+          amount:
+            type: string
+            format: Amount
+            example: "123.123456"
+          creator_details:
+            $ref: '#/components/schemas/Details'
+
+

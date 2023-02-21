@@ -1,0 +1,111 @@
+/v3/swaps/{id}:
+  get:
+    tags:
+      - Swaps
+    summary: Swap by ID
+    description: |
+      Allows getting `Swap` with corresponding details.\n
+      🔒 Admin, swap source, or swap destination signature is required \n
+    operationId: getSwap
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of a swap
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [source_balance, destination_balance, asset]
+      - name: filter[source]
+        in: query
+        description: |
+          Filters swaps by a specified source's account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[destination]
+        in: query
+        description: |
+          Filters swaps by a specified destination's account address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[destination_balance]
+        in: query
+        description: |
+          Filters swaps by a specified destination's balance address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[source_balance]
+        in: query
+        description: |
+          Filters swaps by a specified source's balance address.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[state]
+        in: query
+        description: |
+          Filters sales by a specified sale state.
+          Available sale states:
+          * 1 - open
+          * 2 - closed
+          * 3 - cancelled
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          example: 1
+    responses:
+      200:
+        description: swap exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Swap'
+                included:
+                  type: array
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: swap does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

@@ -1,0 +1,95 @@
+TransactionKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "17179869186"
+    type:
+      type: string
+      enum:
+        - "transactions"
+
+Transaction:
+  allOf:
+    - $ref: '#/components/schemas/TransactionKey'
+    - type: object
+      x-go-needs-meta: true
+      required: [attributes, relationships]
+      properties:
+        attributes:
+          type: object
+          required: [hash, ledger_sequence, created_at, envelope_xdr, result_xdr, result_meta_xdr]
+          properties:
+            hash:
+              type: string
+              example: "575a8bad0a67378029c778d92eb5367136e89530830ed8275ff20ac80160a80d"
+              description: "hash of transaction"
+            ledger_sequence:
+              type: integer
+              format: int32
+              example: 4
+              description: "sequence of ledger where transaction belongs to"
+            created_at:
+              type: string
+              format: date-time
+              description: "close time of ledger where transaction belongs to"
+              example: "2019-03-04T18:42:15Z"
+            envelope_xdr:
+              type: string
+              description: "base-64 encoded XDR representation of transaction itself"
+              example: "AAAAAEHCX5tmu0fXlkE9GLIOLO185ih5QI7V+PZ1mtb1tnzSA59veKFdUjsAAAAAAAAAAAAAAABchp31A..."
+            result_xdr:
+              type: string
+              description: "base-64 encoded XDR representation of core response"
+              example: "AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAALAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA"
+            result_meta_xdr:
+              type: string
+              description: "base-64 encoded XDR representation of core response's meta information"
+              example: "AAAAAAAAAAEAAAAMAAAAAwAAAAEAAAAaAAAAAAAAAAEAAAABAAAAAAAAAAEAAAACe30AAAAAAAAAAAAAAAAAAwAAAA..."
+        relationships:
+          type: object
+          properties:
+            operations:
+              description: "represents operations included to transaction"
+              type: array
+              items:
+                $ref: '#/components/schemas/OperationKey'
+            source:
+              description: "represents source account of transaction"
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/AccountKey'
+            ledger_entry_changes:
+              description: "represents exact changes of ledger entries caused by transaction"
+              type: array
+              items:
+                $ref: '#/components/schemas/LedgerEntryChangeKey'
+
+TransactionResponseMeta:
+  type: object
+  required: [latest_ledger_sequence, latest_ledger_close_time]
+  properties:
+    latest_ledger_sequence:
+      type: integer
+    latest_ledger_close_time:
+      type: string
+      format: date-time
+
+SubmitTransactionBody:
+  type: object
+  required: [tx]
+  properties:
+    tx:
+      type: string
+      description: "base-64 encoded XDR representation of transaction itself"
+      example: "AAAAAEHCX5tmu0fXlkE9GLIOLO185ih5QI7V+PZ1mtb1tnzSA59veKFdUjsAAAAAAAAAAAAAAABchp31A..."
+    wait_for_ingest:
+      type: boolean
+      description: "defines whether to wait for ingest of transaction or not"
+      default: false
+    wait_for_result:
+      type: boolean
+      description: "EXPERIMENTAL: defines whether we need to wait for result of transaction or not. NOTE: it is not allowed to set `wait_for_ingest = true` and `wait_for_result = false`."
+      default: true

@@ -1,0 +1,29 @@
+CreateManageLimitsRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-manage-limits-request"
+
+CreateManageLimitsRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateManageLimitsRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - creator_details
+        properties:
+          creator_details:
+            $ref: '#/components/schemas/Details'

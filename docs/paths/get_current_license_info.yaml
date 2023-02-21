@@ -1,0 +1,27 @@
+/v3/license:
+  get:
+    tags:
+      - License
+    summary: Current license info
+    description: |
+      Allows getting current license information
+    operationId: getCurrentLicense
+    responses:
+      200:
+        description: succesfully retrieved license
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/LicenseInfo'
+      503:
+        description: server overloaded
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+
+
+
+
+

@@ -1,0 +1,54 @@
+DeferredPaymentKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "deferred-payments"
+
+DeferredPayment:
+  allOf:
+    - $ref: '#/components/schemas/DeferredPaymentKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - details
+            - amount
+            - state
+            - state_i
+          properties:
+            state:
+              type: string
+              description: "String representation of the payment state"
+              example: "pending"
+            state_i:
+              type: integer
+              description: "Integer representation of the payment state"
+              example: 0
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            details:
+              $ref: '#/components/schemas/Details'
+              description: "free-form object to attach details to the deferredPayment"
+        relationships:
+          type: object
+          properties:
+            source:
+              $ref: '#/components/schemas/AccountKey'
+            destination:
+              $ref: '#/components/schemas/AccountKey'
+            source_balance:
+              $ref: '#/components/schemas/BalanceKey'
+            asset:
+              $ref: '#/components/schemas/AssetKey'

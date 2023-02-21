@@ -1,0 +1,24 @@
+RemoveDataOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-remove-data"
+
+RemoveDataOp:
+  allOf:
+    - $ref: '#/components/schemas/RemoveDataOpKey'
+    - type: object
+      required: [relationships]
+      properties:
+        relationships:
+          type: object
+          properties:
+            owner:
+              $ref: '#/components/schemas/AccountKey'
+            data:
+              $ref: '#/components/schemas/DataKey'

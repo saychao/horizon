@@ -1,0 +1,75 @@
+LedgerEntryChangeKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "17179869186:17179869186:0"
+    type:
+      type: string
+      enum:
+        - "ledger-entry-changes"
+
+LedgerEntryChange:
+  allOf:
+    - $ref: '#/components/schemas/LedgerEntryChangeKey'
+    - type: object
+      required: [attributes]
+      properties:
+        attributes:
+          type: object
+          required: [change_type, entry_type, payload]
+          properties:
+            change_type:
+              format: xdr.LedgerEntryChangeType
+              description: |
+                          Type of change that was applied to entry
+                          * 0: "created"
+                          * 1: "updated"
+                          * 2: "removed"
+                          * 3: "state"
+              example: 0
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+            entry_type:
+              format: xdr.LedgerEntryType
+              description: |
+                           Type of entry that was modified
+                           * 1:  "any"
+                           * 2:  "account"
+                           * 3:  "signer"
+                           * 4:  "fee"
+                           * 5:  "balance"
+                           * 6:  "payment_request"
+                           * 7:  "asset"
+                           * 8:  "reference_entry"
+                           * 9:  "statistics"
+                           * 10: "trust"
+                           * 11: "account_limits"
+                           * 12: "asset_pair"
+                           * 13: "offer_entry"
+                           * 15: "reviewable_request"
+                           * 16: "external_system_account_id"
+                           * 17: "sale"
+                           * 18: "account_kyc"
+                           * 19: "external_system_account_id_pool_entry"
+                           * 20: "key_value"
+                           * 22: "limits_v2"
+                           * 23: "statistics_v2"
+                           * 24: "pending_statistics"
+                           * 25: "contract"
+                           * 26: "account_role"
+                           * 27: "account_rule"
+                           * 28: "atomic_swap_bid"
+                           * 29: "transaction"
+                           * 30: "signer_rule"
+                           * 31: "signer_role"
+                           * 32: "stamp"
+                           * 33: "license"
+                           * 34: "poll"
+                           * 35: "vote"
+              example: 3
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+            payload:
+              type: string
+              example: "AAAAAwAAAAEAAAAaAAAAAAAAAAEAAAABAAAAAAAAAAEAAAACe30AAAAAAAAAAAAA"

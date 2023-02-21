@@ -1,0 +1,110 @@
+/v3/atomic_swap_asks:
+  get:
+    tags:
+    - Atomic Swap
+    summary: Atomic Swap Ask List
+    description: |
+      Allows getting a filtered list of `Atomic Swap Ask` with corresponding details.
+    operationId: getAtomicSwapAsks
+    parameters:
+    - name: filter[base_asset]
+      in: query
+      description: |
+        Filters atomic swap asks by a base asset.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer
+    - name: filter[owner]
+      in: query
+      description: |
+        Filters atomic swap asks by a specified owner's account address.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+    - name: filter[quote_assets]
+      in: query
+      description: |
+        Filters atomic swap asks by quote assets. Returns the page of atomic swap asks where all quote assets present.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+    - name: include
+      in: query
+      description: |
+        Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+        - base_balance
+        - owner
+        - base_asset
+        - quote_assets
+    - $ref: '#/components/schemas/pageNumberParam'
+    - $ref: '#/components/schemas/pageLimitParam'
+    - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: atomic swap ask exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/AtomicSwapAsk'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    anyOf:
+                    - type: object
+                      $ref: '#/components/schemas/Account'
+                    - type: object
+                      $ref: '#/components/schemas/Balance'
+                    - type: object
+                      properties:
+                        quote_assets:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Asset'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/assets?include=owner&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/assets?include=owner&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: asset does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

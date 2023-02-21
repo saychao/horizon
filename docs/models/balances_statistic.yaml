@@ -1,0 +1,49 @@
+BalancesStatisticKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "balances-statistic"
+
+BalancesStatistic:
+  allOf:
+    - $ref: '#/components/schemas/BalancesStatisticKey'
+    - type: object
+      required: [attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - pending_sales_amount
+            - full_amount
+            - available_amount
+            - closed_sales_amount
+            - asset
+          properties:
+            available_amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            full_amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            pending_sales_amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            closed_sales_amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            asset:
+              type: string
+              example: "USD"
+

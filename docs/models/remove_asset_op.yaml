@@ -1,0 +1,22 @@
+RemoveAssetOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+      - "operations-remove-asset"
+
+RemoveAssetOp:
+  allOf:
+  - $ref: '#/components/schemas/RemoveAssetOpKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          asset:
+            $ref: '#/components/schemas/AssetKey'

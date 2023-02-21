@@ -1,0 +1,90 @@
+KeyValueEntryKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "max_contracts_count" # TODO provide a list of valid keys and corresponding values
+    type:
+      type: string
+      enum:
+        - "key-value-entries"
+
+U32:
+  type: object
+  required:
+    - type
+  properties:
+    type:
+      descriprion: defines the type of value stored in the KV pair
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+    u32:
+      type: number
+      example: 1
+      format: uint32
+
+U64:
+  type: object
+  required:
+    - type
+  properties:
+    type:
+      descriprion: defines the type of value stored in the KV pair
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+    u64:
+      type: number
+      example: 1
+      format: uint64
+
+
+Str:
+  type: object
+  required:
+    - type
+  properties:
+    type:
+      descriprion: defines the type of value stored in the KV pair
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+    str:
+      type: string
+      example: "example-value"
+
+
+
+KeyValueEntryValue:
+  oneOf:
+  - $ref: '#/components/schemas/U32'
+    format: uint32
+  - $ref: '#/components/schemas/U64'
+    format: uint64
+  - $ref: '#/components/schemas/Str'
+    format: string
+
+KeyValueEntry:
+  allOf:
+  - $ref: '#/components/schemas/KeyValueEntryKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - value
+        properties:
+          value:
+            type: object
+            description: |
+              Defines the value of KeyValueEntry.
+              Note that, according to the defined `type`, only one value field is present.
+              All other fields are either `null` or absent.\n
+              Possible value fields:
+              * `U32`
+              * `U64`
+              * `Str`
+            $ref: '#/components/schemas/KeyValueEntryValue'
+

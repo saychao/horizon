@@ -1,0 +1,57 @@
+VoteKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      description: "Account address of the voter"
+    type:
+      type: string
+      enum:
+        - "votes"
+
+Vote:
+  allOf:
+    - $ref: '#/components/schemas/VoteKey'
+    - type: object
+      x-go-scan-value: true
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            voter:
+              type: object
+              description: "the account that submitted the vote"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+            poll:
+              type: object
+              description: "poll where the vote was submitted to"
+              properties:
+                data:
+                  $ref: '#/components/schemas/PollKey'
+        attributes:
+          type: object
+          required: [vote_data]
+          properties:
+            vote_data:
+              $ref: '#/components/schemas/VoteData'
+VoteData:
+  type: object
+  required: [poll_type]
+  properties:
+    poll_type:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      format: xdr.PollType
+      description: "type of the poll"
+    single_choice:
+      type: integer
+      format: uint64
+    creation_time:
+      type: string
+      format: date-time
+#    multiple_choice: TODO
+#

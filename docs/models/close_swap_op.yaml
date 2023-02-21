@@ -1,0 +1,28 @@
+CloseSwapOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-close-swap"
+
+CloseSwapOp:
+  allOf:
+    - $ref: '#/components/schemas/CloseSwapOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            swap:
+              $ref: '#/components/schemas/SwapKey'
+        attributes:
+          type: object
+          properties:
+            secret:
+              type: string
+              description: "secret of the swap in hexadecimal format"

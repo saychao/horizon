@@ -1,0 +1,38 @@
+CreateWithdrawRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-withdrawal-request"
+
+
+CreateWithdrawRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateWithdrawRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          balance:
+            $ref: '#/components/schemas/BalanceKey'
+      attributes:
+        type: object
+        required:
+          - fee
+          - amount
+          - creator_details
+        properties:
+          fee:
+            $ref: '#/components/schemas/Fee'
+          amount:
+            type: string
+            format: Amount
+            example: "123.123456"
+          creator_details:
+            $ref: '#/components/schemas/Details'

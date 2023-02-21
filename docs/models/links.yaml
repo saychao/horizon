@@ -1,0 +1,14 @@
+Links:
+  type: object
+  required: [self, first, prev, next, last]
+  properties:
+    self:
+      type: string
+    first:
+      type: string
+    prev:
+      type: string
+    next:
+      type: string
+    last:
+      type: string

@@ -1,0 +1,67 @@
+ReviewRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-review-request"
+
+ReviewRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/ReviewRequestOpKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required:
+          - action
+          - reason
+          - request_hash
+          - request_id
+          - is_fulfilled
+          - added_tasks
+          - removed_tasks
+          - external_details
+        properties:
+          action:
+            format: xdr.ReviewRequestOpAction
+            description: |
+              * 1: "approve"
+              * 2: "reject"
+              * 3: "permanent_reject"
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+          reason:
+            type: string
+            description: "Reject reason"
+            example: "Some reject reason"
+          request_hash:
+            type: string
+            description: "Hash of the request being reviewed"
+            example: "13935d561f9ec54341243e6afaf0c8bf936928b07f6600204ba8ca550757d0a6"
+          request_id:
+            type: integer
+            format: int64
+            description: "ID of the request being reviewed"
+            example: 2
+          is_fulfilled:
+            type: boolean
+            description: "Whether request being reviewed was fulfilled"
+            example: false
+          added_tasks:
+            type: integer
+            format: uint32
+            description: "Tasks that were added on the request review"
+            example: 16
+          removed_tasks:
+            type: integer
+            format: uint32
+            description: "Tasks that were removed on the request review"
+            example: 1
+          external_details:
+            $ref: '#/components/schemas/Details'
+

@@ -1,0 +1,30 @@
+UpdateDataOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-update-data"
+
+UpdateDataOp:
+  allOf:
+    - $ref: '#/components/schemas/UpdateDataOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/DataKey'
+        attributes:
+          type: object
+          required:
+            - id
+            - value
+          properties:
+            value:
+              $ref: '#/components/schemas/Details'

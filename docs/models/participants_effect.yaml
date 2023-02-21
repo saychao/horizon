@@ -1,0 +1,35 @@
+ParticipantsEffectKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "lkasjdlkasjd"
+    type:
+      type: string
+      enum:
+        - "participant-effects"
+
+ParticipantsEffect:
+  allOf:
+  - $ref: '#/components/schemas/ParticipantsEffectKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          account:
+            type: object
+            $ref: '#/components/schemas/AccountKey'
+          balance:
+            type: object
+            $ref: '#/components/schemas/BalanceKey'
+          asset:
+            type: object
+            $ref: '#/components/schemas/AssetKey'
+          operation:
+            type: object
+            $ref: '#/components/schemas/OperationKey'
+          effect:
+            type: object
+            $ref: '#/components/schemas/EffectKey'

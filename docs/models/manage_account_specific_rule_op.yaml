@@ -1,0 +1,50 @@
+ManageAccountSpecificRuleOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-manage-account-specific-rule"
+
+
+CreateAccountSpecificRuleData:
+  type: object
+  required: [forbids, ledger_key]
+  properties:
+    account_id:
+      type: string
+    forbids:
+      type: boolean
+    ledger_key:
+      allOf:
+        - $ref: '#/components/schemas/Details'
+      type: object
+      format: xdr.LedgerKey
+      description: "Ledger entry key"
+
+ManageAccountSpecificRuleOp:
+  allOf:
+    - $ref: '#/components/schemas/ManageAccountSpecificRuleOpKey'
+    - type: object
+      properties:
+        relationships:
+          type: object
+          properties:
+            rule:
+              $ref: '#/components/schemas/AccountSpecificRuleKey'
+        attributes:
+          type: object
+          required: [rule_id, action]
+          properties:
+            action:
+              format: xdr.ManageAccountSpecificRuleAction
+              description: |
+                * 0: create
+                * 1: remove
+              allOf:
+                - $ref: '#/components/schemas/Enum'
+            create_data:
+              $ref: '#/components/schemas/CreateAccountSpecificRuleData'

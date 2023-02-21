@@ -1,0 +1,38 @@
+DataKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "10"
+    type:
+      type: string
+      enum:
+        - "datas"
+
+Data:
+  allOf:
+    - $ref: '#/components/schemas/DataKey'
+    - type: object
+      x-go-scan-value: true
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            owner:
+              type: object
+              description: "account that created the data"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required: [type, value]
+          properties:
+            type:
+              type: integer
+              format: uint64
+              example: 4
+              description: "is used to restrict using of data through rules"
+            value:
+              $ref: '#/components/schemas/Details'

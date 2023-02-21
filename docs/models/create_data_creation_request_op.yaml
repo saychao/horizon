@@ -1,0 +1,38 @@
+CreateDataCreationRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-data-creation-request"
+
+CreateDataCreationRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateDataCreationRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          owner:
+            $ref: '#/components/schemas/AccountKey'
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - type
+          - value
+          - creator_details
+        properties:
+          creator_details:
+            $ref: '#/components/schemas/Details'
+          type:
+            type: integer
+            format: uint64
+          value:
+            $ref: '#/components/schemas/Details'

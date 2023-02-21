@@ -1,0 +1,17 @@
+Resources:
+  type: array
+  items:
+    type: object
+    oneOf:
+    - $ref: '#/components/schemas/Account'
+    - $ref: '#/components/schemas/Balance'
+    - $ref: '#/components/schemas/BalanceState'
+    - $ref: '#/components/schemas/Asset'
+    - $ref: '#/components/schemas/FeeRecord'
+    - $ref: '#/components/schemas/Limits'
+    - $ref: '#/components/schemas/ExternalSystemID'
+    - $ref: '#/components/schemas/AccountRole'
+    - $ref: '#/components/schemas/AccountRule'
+    - $ref: '#/components/schemas/OrderBookEntry'
+    - $ref: '#/components/schemas/Offer'
+    - $ref: '#/components/schemas/CreateSaleRequest'

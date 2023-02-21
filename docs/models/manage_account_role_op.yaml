@@ -1,0 +1,35 @@
+ManageAccountRoleOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-account-role"
+        - "operations-update-account-role"
+        - "operations-remove-account-role"
+
+ManageAccountRoleOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageAccountRoleOpKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          rules:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountRuleKey'
+          role:
+            $ref: '#/components/schemas/AccountRoleKey'
+      attributes:
+        type: object
+        required:
+          - details
+        properties:
+          details:
+            $ref: '#/components/schemas/Details'

@@ -1,0 +1,63 @@
+/v3/accounts/{id}/balances_statistic/{asset_code}:
+  get:
+    tags:
+      - Balances
+    summary: Balances Statistic List
+    operationId: getBalancesStatisticList
+    parameters:
+      - name: id
+        in: path
+        description: "ID of the account"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: asset_code
+        in: path
+        description: "ID of the collection (asset to convert balances to)"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: balances statistic exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalancesStatistic'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/fees?include=asset&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/fees?include=asset&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: fees do not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

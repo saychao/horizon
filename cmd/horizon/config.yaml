@@ -1,0 +1,31 @@
+config:
+  stellar_core_url: http://localhost:8080
+  stellar_core_database_url: postgres://core:core@localhost:8081/core?sslmode=disable
+  hostname: ""
+  database_url: postgres://horizon:horizon@localhost:8001/horizon?sslmode=disable
+  log_level: "warn"
+  slow_query_bound: 1s
+  port: 8000
+  api_backend: http://
+  ingest: true
+  stale_threshold: 0
+  sign_checkskip: true
+  cors_enabled: true
+  disable_api_submit: true
+  disable_tx_tfa: true
+  template_backend: http://
+  force_https_links: true
+  sentry_dsn: ""
+  sentry_log_level: ""
+  project: ""
+  env: ""
+  migrate_up_on_start: false
+  invest_ready: http://
+  telegram_airdrop: http://
+
+janus:
+  disabled: true
+  endpoint: http://localhost:8081
+  upstream: http://localhost:8000
+  surname: horizon
+

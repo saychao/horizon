@@ -1,0 +1,58 @@
+CreateManageOfferRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "1235"
+    type:
+      type: string
+      enum:
+        - "operations-create-manage-offer-request"
+
+CreateManageOfferRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CreateManageOfferRequestOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/RequestKey'
+        attributes:
+          type: object
+          required:
+            - offer_id
+            - order_book_id
+            - base_amount
+            - price
+            - is_buy
+            - fee
+            - creator_details
+          properties:
+            offer_id:
+              type: integer
+              format: int64
+              description: "ID of the offer to manage"
+              example: 1
+            order_book_id:
+              type: integer
+              format: int64
+              description: "ID of the order book"
+              example: 0
+            base_amount:
+              type: string
+              format: Amount
+              example: "1000.0"
+            price:
+              type: string
+              format: Amount
+              example: "12.3"
+            is_buy:
+              type: boolean
+              description: "Offer direction"
+            creator_details:
+              $ref: '#/components/schemas/Details'
+            fee:
+              $ref: '#/components/schemas/Fee'

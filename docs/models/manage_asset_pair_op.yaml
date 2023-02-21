@@ -1,0 +1,55 @@
+ManageAssetPairOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-manage-asset-pair"
+
+ManageAssetPairOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageAssetPairOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          base_asset:
+            $ref: '#/components/schemas/AssetKey'
+          quote_asset:
+            $ref: '#/components/schemas/AssetKey'
+      attributes:
+        type: object
+        required:
+          - policies
+          - physical_price
+          - physical_price_correction
+          - max_price_step
+        properties:
+          physical_price:
+            type: string
+            format: Amount
+            example: "123.1"
+          physical_price_correction:
+            type: string
+            format: Amount
+            example: "123.1"
+          max_price_step:
+            type: string
+            format: Amount
+            example: "1.1"
+          policies:
+            allOf:
+              - $ref: '#/components/schemas/Mask'
+            format: xdr.AssetPairPolicy
+            nullable: true
+            description: |
+              Bit mask.
+              * 1: "tradeable_secondary_market"
+              * 2: "physical_price_restriction"
+              * 4: "current_price_restriction"
+

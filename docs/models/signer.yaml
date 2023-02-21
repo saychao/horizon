@@ -1,0 +1,72 @@
+SignerKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      type:
+        type: string
+        enum: 
+        - "signers"
+Signer:
+  allOf:
+  - $ref: '#/components/schemas/SignerKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      attributes:
+        type: object
+        required: [weight, identity, details]
+        properties:
+          weight:
+            type: integer
+            format: uint32
+            description: "weight of the signature created by the signer"
+          identity:
+            type: integer
+            format: uint32
+            description: "identity of the signer (signatures of signers with same identities are considered as one signature with max weight)"
+          details:
+            $ref: '#/components/schemas/Details'
+            description: "free-form object to attach details to the signer"
+      relationships:
+        type: object
+        properties:
+          role:
+            description: "role of a signer"
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/SignerRoleKey'
+          account:
+            type: object
+            description: "account controlled by this signer"
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+
+UpdateSignerData:
+  type: object
+  required: [identity, weight, role_id, details]
+  properties:
+    identity:
+      type: integer
+      format: uint32
+    role_id:
+      type: integer
+      format: uint64
+      example: 1
+    weight:
+      type: integer
+      format: uint32
+      example: 12
+      minimum: 1
+      maximum: 1000
+      description: "Weight of the signer of the account"
+    details:
+      $ref: '#/components/schemas/Details'

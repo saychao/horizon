@@ -1,0 +1,70 @@
+ManageAssetOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-manage-asset"
+
+ManageAssetOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageAssetOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - asset_code
+          - action
+          - creator_details
+          - pre_issuance_signer
+          - max_issuance_amount
+        properties:
+          asset_code:
+            type: string
+            example: "USD"
+            description: "Asset to manage"
+          action:
+            format: xdr.ManageAssetAction
+            description: |
+              * 0: "create_asset_creation_request"
+              * 1: "create_asset_update_request"
+              * 2: "cancel_asset_request"
+              * 3: "change_preissued_asset_signer"
+              * 4: "update_max_issuance"
+            allOf:
+            - $ref: '#/components/schemas/Enum'
+          policies:
+            allOf:
+              - $ref: '#/components/schemas/Mask'
+            format: xdr.AssetPolicy
+            nullable: true
+            description: |
+              Bit mask.
+              * 1:  "transferable"
+              * 2:  "base_asset"
+              * 4:  "stats_quote_asset"
+              * 8:  "withdrawable"
+              * 16: "issuance_manual_review_required"
+              * 32: "can_be_base_in_atomic_swap"
+              * 64: "can_be_quote_in_atomic_swap"
+          creator_details:
+            $ref: '#/components/schemas/Details'
+          pre_issuance_signer:
+            type: string
+            description: "Address of pre-issuance signer"
+          max_issuance_amount:
+            type: string
+            format: Amount
+            example: "1000.0"
+
+

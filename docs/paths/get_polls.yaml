@@ -1,0 +1,167 @@
+/v3/polls:
+  get:
+    tags:
+      - Polls
+    summary: Polls list
+    description: |
+      Allows getting a filtered list of `Polls` with corresponding details.\n
+      🔒 Depending on the case, different signatures are required:\n
+        1. if no filters are applied, admin signature is required.\n
+        2. if filter by owner is applied, signature of owner is required\n
+    operationId: getPolls
+    parameters:
+      - name: filter[owner]
+        in: query
+        description:
+          - Filters polls by specified owner id
+        required: false
+        style: form
+        explore: false
+        schema:
+          type: string
+          format: valid accountID
+          example: "GAULFBQKQTFHHHZEIRMYVCGTY47FKWEW7P2BY2YT45HAEODAIJUJH23T"
+      - name: filter[result_provider]
+        in: query
+        description:
+          - Filters polls by specified result provider id
+        required: false
+        style: form
+        explore: false
+        schema:
+          type: string
+          format: valid accountID
+          example: "GBULFBQKQTFHHHZEIRMYVCGTY47FKWEW7P2BY2YT45HAEODAIJUJH23E"
+      - name: filter[permission_type]
+        in: query
+        description:
+          - Filters polls by specified permission type
+        required: false
+        style: form
+        explode: false
+      - name: filter[poll_type]
+        in: query
+        description: |
+          Filters polls by a specified poll type.
+          Available poll types:
+          * 0 - single choice
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          example: 0
+      - name: filter[vote_confirmation]
+        in: query
+        description: |
+          Filters polls by `VoteConfirmationRequired` property
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          example: false
+      - name: filter[min_start_time]
+        in: query
+        description: |
+          Filters polls by a specified minimum start time of the poll.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: "date-time"
+          example: "2012-10-30T22:08:41+00:00"
+      - name: filter[min_end_time]
+        in: query
+        description: |
+          Filters polls by a specified minimum end time of the poll.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: "date-time"
+          example: "2012-10-30T22:08:41+00:00"
+      - name: filter[max_start_time]
+        in: query
+        description: |
+          Filters polls by a specified maximal start time of the poll.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: "date-time"
+          example: "2012-10-30T22:08:41+00:00"
+      - name: filter[max_end_time]
+        in: query
+        description: |
+          Filters polls by a specified maximal end time of the poll.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: "date-time"
+          example: "2012-10-30T22:08:41+00:00"
+      - name: filter[state]
+        in: query
+        description: |
+          Filters polls by a specified poll state.
+          Available poll states:
+          * 1 - open
+          * 2 - passed
+          * 3 - failed
+          * 4 - cancelled
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      - $ref: '#/components/schemas/pageCursorParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: polls exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Poll'
+                included:
+                    type: array
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/polls?page[cursor]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/polls?page[cursor]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

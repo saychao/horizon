@@ -1,0 +1,74 @@
+/v3/polls/{id}/relationships/votes/{voter}:
+  get:
+    tags:
+      - Polls
+    summary: Vote by ID
+    description: |
+      Allows getting `Vote` with corresponding details.\n
+      🔒 Admin, voter, poll owner or poll result provider signature is required.\n
+    operationId: getVoteByID
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of a poll
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: voter
+        in: path
+        description: Unique identifier of a voter account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "GAULFBQKQTFHHHZEIRMYVCGTY47FKWEW7P2BY2YT45HAEODAIJUJH23T"
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [poll]
+    responses:
+      200:
+        description: vote exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Vote'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    oneOf:
+                      - $ref: '#/components/schemas/Poll'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: vote does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

@@ -1,0 +1,66 @@
+MatchKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "17179869186"
+    type:
+      type: string
+      enum:
+        - "matches"
+
+Match:
+  allOf:
+    - $ref: '#/components/schemas/MatchKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - quote_amount
+            - base_amount
+            - created_at
+            - price
+          properties:
+            created_at:
+              type: string
+              description: "time when the match was happened"
+              format: "date-time"
+              example: "2018-11-01T22:11:41Z"
+            quote_amount:
+              type: string
+              format: Amount
+              description: "defines base amount of the match"
+              example: "34.551851"
+            base_amount:
+              type: string
+              format: Amount
+              description: "defines quote amount of the match"
+              example: "55.001291"
+            price:
+              type: string
+              format: Amount
+              description: "defines price of the match"
+              example: "51.150509"
+        relationships:
+          type: object
+          required:
+            - base_asset
+            - quote_asset
+          properties:
+            base_asset:
+              type: object
+              description: "defines base asset of the match"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            quote_asset:
+              type: object
+              description: "defines quote asset of the match"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'

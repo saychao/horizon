@@ -1,0 +1,139 @@
+AssetKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "USD"
+      type:
+        type: string
+        enum: 
+          - "assets"
+Asset:
+  allOf:
+  - $ref: '#/components/schemas/AssetKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          owner:
+            type: object
+            description: "Owner of an asset"
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required:
+          - pre_issuance_asset_signer
+          - details
+          - max_issuance_amount
+          - available_for_issuance
+          - issued
+          - pending_issuance
+          - policies
+          - trailing_digits
+          - type
+          - state
+        properties:
+          pre_issuance_asset_signer:
+            type: string
+            description: "address of the signer responsible for pre-issuance. [Details↪](https://tokend.gitbook.io/knowledge-base/technical-details/key-entities/asset#pre-issued-asset-signer)"
+            example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+          max_issuance_amount:
+            type: string
+            description: "Max volume of an asset that can be in circulation"
+            example: "1000.000001"
+            format: Amount
+          available_for_issuance:
+            type: string
+            description: "Asset volume authorized to be issued by an asset owner"
+            example: "20.000000"
+            format: Amount
+          issued:
+            type: string
+            description: "Asset volume that is currently in circulation"
+            example: "10.000000"
+            format: Amount
+          pending_issuance:
+            type: string
+            description: "Asset volume to be distributed via [asset sale↪](https://tokend.gitbook.io/knowledge-base/platform-features/crowdfunding) but currently locked by the system"
+            example: "123.000123"
+            format: Amount
+          policies:
+            format: xdr.AssetPolicy
+            decription: "Bit mask whose bits defines asset properties "
+            allOf:
+            - $ref: '#/components/schemas/Mask'
+          trailing_digits:
+            type: integer
+            format: uint32
+            description: "Number of significant digits after the point"
+            maximum: 6
+            minimum: 0
+            example: 2
+          type:
+            type: integer
+            format: uint64
+            description: "Numeric type of asset"
+            example: 2
+          state:
+            format: AssetState
+            description: |
+              Asset state
+              * 0 - active
+              * 1 - deleted
+            allOf:
+            - $ref: '#/components/schemas/Enum'
+          details:
+            $ref: '#/components/schemas/Details'
+            description: "free-form object to attach asset details such as a link to icon, short description, etc."
+
+QuoteAssetKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "5"
+    type:
+      type: string
+      enum:
+        - "quote-assets"
+
+QuoteAsset:
+  allOf:
+    - $ref: '#/components/schemas/QuoteAssetKey'
+    - type: object
+      required: [attributes]
+      properties:
+        attributes:
+          type: object
+          required:
+            - price
+            - current_cap
+            - total_current_cap
+            - hard_cap
+          properties:
+            price:
+              type: string
+              format: Amount
+            current_cap:
+              type: string
+              format: Amount
+            total_current_cap:
+              type: string
+              format: Amount
+            hard_cap:
+              type: string
+              format: Amount
+            soft_cap:
+              type: string
+              format: Amount

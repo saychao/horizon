@@ -1,0 +1,106 @@
+AccountKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      type:
+        type: string
+        enum: 
+        - "accounts"
+
+Account:
+  allOf:
+  - $ref: '#/components/schemas/AccountKey'
+  - type: object
+    required: [attributes, relationships]
+    properties:
+      attributes:
+        type: object
+        properties:
+          kyc_recovery_status:
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+            format: KYCRecoveryStatus
+            description: |
+              Indicates kyc recovery status of the account
+              * 0 - none
+              * 1 - initiated
+              * 2 - pending
+              * 3 - rejected
+              * 4 - permanently_rejected
+      relationships:
+        type: object
+        properties:
+          signers:
+            description: "Signers of this account"
+            type: object
+            properties:
+              data: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/SignerKey'
+          referrer:
+            description: "Referrer is another account that introduced this account into the system."
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKey'
+          balances:
+            description: "Defines balances of this account"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BalanceKey'
+          limits:
+            description: "Defines limits specified for this account"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LimitsKey'
+          external_system_ids: # FIXME have a trouble with name (Ids -> IDs)
+            description: "Defines external system IDs binded to this account"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExternalSystemIDKey'
+          role:
+            type: object
+            description: "Defines the role of this account"
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountRoleKey'
+          fees:
+            description: "Defines fees applied to this account"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeeKey'
+          limits_with_stats:
+            description: "Defines limits specified for a particular account and outcome statistics of this account"
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LimitsWithStatsKey'
+          kyc_data:
+            description: "KYC data for a particular account (contains creator details of approved change role request)"
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AccountKYCKey'

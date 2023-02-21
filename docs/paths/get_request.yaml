@@ -1,0 +1,58 @@
+/v3/requests/{id}:
+  get:
+    tags:
+      - Requests
+    summary: Reviewable Request by ID
+    description: |
+      Allows getting `ReviewableRequest` by ID\n
+      🔒 Requestor's or reviewer's signature is needed
+    operationId: getRequest
+    parameters:
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - "request_details"
+    responses:
+      200:
+        description: requests exist
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/ReviewableRequest'
+                included:
+                  type: object
+                  $ref: '#/components/schemas/ReviewableRequestDetails'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: request does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

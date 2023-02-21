@@ -1,0 +1,113 @@
+/:
+  get:
+    deprecated: true
+    tags:
+    - Info
+    summary: Horizon info
+    description: |
+                  Allows getting basic info about horizon
+    operationId: getInfo
+    responses:
+      200:
+        description: succesfully retrieved page
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - ledger_state
+                - network_passphrase
+                - admin_account_id
+                - master_exchange_name
+                - tx_expiration_period
+                - current_time
+                - precision
+                - xdr_revision
+              properties:
+                ledger_state:
+                  type: object
+                  required:
+                    - core
+                    - history
+                    - history_2
+                  properties:
+                    core:
+                      type: object
+                      required: [latest,oldest_on_start,last_ledger_increase_time]
+                      properties:
+                        latest:
+                          type: number
+                          format: uint64
+                          description: "latest known ledger in core"
+                        oldest_on_start:
+                          type: number
+                          format: uint64
+                          description: "id of the ledger from which horizon started counting ledgers on this run"
+                        last_ledger_increase_time:
+                          type: string
+                          format: date-time
+                          description: "time of the latest ledger closing"
+                    history:
+                      type: object
+                      required: [latest,oldest_on_start,last_ledger_increase_time]
+                      properties:
+                        latest:
+                          type: number
+                          format: uint64
+                          description: "latest known ledger in core"
+                        oldest_on_start:
+                          type: number
+                          format: uint64
+                          description: "id of the ledger from which horizon started counting ledgers on this run"
+                        last_ledger_increase_time:
+                          type: string
+                          format: date-time
+                          description: "time of the latest ledger closing"
+                    history_2:
+                      type: object
+                      required: [latest,oldest_on_start,last_ledger_increase_time]
+                      properties:
+                        latest:
+                          type: number
+                          format: uint64
+                          description: "latest known ledger in core"
+                        oldest_on_start:
+                          type: number
+                          format: uint64
+                          description: "id of the ledger from which horizon started counting ledgers on this run"
+                        last_ledger_increase_time:
+                          type: string
+                          format: date-time
+                          description: "time of the latest ledger closing"
+                network_passphrase:
+                  type: string
+                  example: "example network passphrase"
+                admin_account_id:
+                  type: string
+                  example: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
+                master_exchange_name:
+                  type: string
+                  example: "TokenD"
+                tx_expiration_period:
+                  type: number
+                  description: "time of transaction expiration in seconds"
+                current_time:
+                  type: number
+                  format: Unix timestamp
+                precision:
+                  type: number
+                  description: "default asset precision in system"
+                xdr_revision:
+                  type: string
+                  example: "7e0659466026577a3ea90ff178773fecc4a85dec"
+      503:
+        description: server overloaded
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+
+
+
+
+

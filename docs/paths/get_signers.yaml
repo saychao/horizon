@@ -1,0 +1,78 @@
+/v3/accounts/{id}/signers:
+  get:
+    tags:
+      - Signers
+      - Accounts
+    summary: Signers for Account
+    description: |
+                  Allows getting `Signers` of the account with corresponding details.
+    operationId: getSignersForAccount
+    parameters:
+    - name: id
+      in: path
+      description: Unique identifier of an account
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: include
+      in: query
+      description: |
+        For signers, following relationships can be included:
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - role
+          - role.rules
+        example: role,role.rules
+    responses:
+      200:
+        description: account exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data: 
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Signer'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    oneOf:
+                    - $ref: '#/components/schemas/Account'
+                    - $ref: '#/components/schemas/SignerRole'
+                    - $ref: '#/components/schemas/SignerRule'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/accounts/GA67BUDBYDGCVCL6EKPDAREG5IPLHSROF6QJX7MLS2BQJZJDO6FCZAKE/signers?include=role,role.rules&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/accounts/GA67BUDBYDGCVCL6EKPDAREG5IPLHSROF6QJX7MLS2BQJZJDO6FCZAKE/signers?include=role,role.rules&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: such an account does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

@@ -1,0 +1,63 @@
+OpenSwapOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-open-swap"
+
+OpenSwapOp:
+  allOf:
+    - $ref: '#/components/schemas/OpenSwapOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            source:
+              $ref: '#/components/schemas/AccountKey'
+            destination:
+              $ref: '#/components/schemas/AccountKey'
+            source_balance:
+              $ref: '#/components/schemas/BalanceKey'
+            destination_balance:
+              $ref: '#/components/schemas/BalanceKey'
+            asset:
+              $ref: '#/components/schemas/AssetKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - source_fee
+            - destination_fee
+            - source_pay_for_destination
+            - details
+            - lock_time
+            - secret_hash
+          properties:
+            source_fee:
+              $ref: '#/components/schemas/Fee'
+            destination_fee:
+              $ref: '#/components/schemas/Fee'
+            source_pay_for_destination:
+              type: boolean
+              example: false
+              description: "Whether source of the swap should pay destination fee"
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            secret_hash:
+              type: string
+              description: "hash of the swap secret in hexadecimal format"
+            details:
+              $ref: '#/components/schemas/Details'
+            lock_time:
+              type: string
+              description: "time when swap can be cancelled"
+              format: "date-time"
+              example: "2012-11-01T22:08:41+00:00"

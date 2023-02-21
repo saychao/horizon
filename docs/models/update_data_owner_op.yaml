@@ -1,0 +1,27 @@
+UpdateDataOwnerOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-update-data-owner"
+
+UpdateDataOwnerOp:
+  allOf:
+    - $ref: '#/components/schemas/UpdateDataOwnerOpKey'
+    - type: object
+      required: [relationships]
+      properties:
+        relationships:
+          type: object
+          required:
+            - data
+            - owner
+          properties:
+            data:
+              $ref: '#/components/schemas/DataKey'
+            new_owner:
+              $ref: '#/components/schemas/AccountKey'

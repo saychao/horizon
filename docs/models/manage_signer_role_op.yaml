@@ -1,0 +1,40 @@
+ManageSignerRoleOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-signer-role"
+        - "operations-update-signer-role"
+        - "operations-remove-signer-role"
+
+ManageSignerRoleOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageSignerRoleOpKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          rules:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountRuleKey'
+          role:
+            $ref: '#/components/schemas/AccountRoleKey'
+      attributes:
+        type: object
+        nullable: true
+        required:
+          - details
+          - is_read_only
+        properties:
+          is_read_only:
+            type: boolean
+            #todo add description
+          details:
+            $ref: '#/components/schemas/Details'

@@ -1,0 +1,70 @@
+/v3/accounts/{id}/sales/{sale_id}:
+  get:
+    tags:
+      - Crowd Investing
+    summary: Sale by ID For Account
+    description: |
+                  Allows getting `Sale` with corresponding details.
+                  🔒 Account owner's signature is needed
+    operation: getSaleByIDForAccount
+    parameters:
+    - name: id
+      in: path
+      description: Unique identifier of an account
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: sale_id
+      in: path
+      description: Unique identifier of a sale
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        format: int64
+    - name: include
+      in: query
+      description: |
+                    Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+      enum:
+        - base_asset
+        - quote_assets
+        - default_quote_asset
+      example: base_asset,default_quote_asset
+    responses:
+      200:
+        description: sale exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Sale'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Asset'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: sale does not exist or account is not allowed to participate in it
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

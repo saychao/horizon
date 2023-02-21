@@ -1,0 +1,73 @@
+StatisticsKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "1"
+    type:
+      type: string
+      enum:
+        - "statistics"
+
+Statistics:
+  allOf:
+  - $ref: '#/components/schemas/StatisticsKey'
+  - type: object
+    required: [
+      relationships,
+      attributes
+    ]
+    properties:
+      relationships:
+        type: object
+        properties:
+          account:
+            type: object
+            description: "account related to a particular statistics entry"
+            properties:
+              data:
+                $ref: '#/components/schemas/AccountKey'
+          asset:
+            type: object
+            description: "asset related to a particular statistics entry"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+      attributes:
+        type: object
+        required: [
+          operation_type,
+          is_convert_needed,
+          daily_out,
+          weekly_out,
+          monthly_out,
+          annual_out,
+          updated_at
+        ]
+        properties:
+          operation_type:
+            description: "defines the type of operation statistics which entry exists for"
+            type: integer
+            format: int32
+          is_convert_needed:
+            description: "if `true`, this statistics entry exists in connection with operations in other assets except for those specified in `asset` relationships"
+            type: boolean
+            example: true
+          daily_out:
+            type: string
+            format: Amount
+          weekly_out:
+            type: string
+            format: Amount
+          monthly_out:
+            type: string
+            format: Amount
+          annual_out:
+            type: string
+            format: Amount
+          updated_at:
+            type: string
+            format: date-time

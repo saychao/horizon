@@ -1,0 +1,24 @@
+RemoveAssetPairOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+      - "operations-remove-asset-pair"
+
+RemoveAssetPairOp:
+  allOf:
+  - $ref: '#/components/schemas/RemoveAssetPairOpKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          base:
+            $ref: '#/components/schemas/AssetKey'
+          quote:
+            $ref: '#/components/schemas/AssetKey'

@@ -1,0 +1,114 @@
+ConvertedBalancesCollectionKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "QTK"
+    type:
+      type: string
+      enum:
+        - "converted-balances-collections"
+
+ConvertedBalancesCollection:
+  allOf:
+    - $ref: '#/components/schemas/ConvertedBalancesCollectionKey'
+    - type: object
+      required: [relationships]
+      properties:
+        relationships:
+          type: object
+          required: [states, asset]
+          properties:
+            asset:
+              type: object
+              description: "asset to which balances are converted"
+              properties:
+                data:
+                  $ref: '#/components/schemas/AssetKey'
+            states:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConvertedBalanceStateKey'
+
+
+ConvertedBalanceStateKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "BDLXKLLVS6UIQEDYCZKIC5222GGQLCOTHM4BWXVCBDQMJTUWUFUATV2Q"
+    type:
+      type: string
+      enum:
+        - "converted-balance-states"
+
+ConvertedBalanceState:
+  allOf:
+    - $ref: '#/components/schemas/ConvertedBalanceStateKey'
+    - type: object
+      required:
+        - attributes
+        - relationships
+      properties:
+        attributes:
+          type: object
+          required:
+            - initial_amounts
+            - converted_amounts
+            - is_converted
+            - price
+          properties:
+            price:
+              type: string
+              format: Amount
+              example: "2.331001"
+              description: "Price that was used to convert amounts"
+            initial_amounts:
+              allOf:
+              - $ref: '#/components/schemas/BalanceStateAttributeAmounts'
+              - type: object
+                description: "Amounts values in the balance's asset"
+            converted_amounts:
+              allOf:
+                - $ref: '#/components/schemas/BalanceStateAttributeAmounts'
+                - type: object
+                  description: "Amount values converted to requested asset"
+            is_converted:
+              type: boolean
+              example: true
+              description: "if `false` - the price doesn't exist and conversion is not possible"
+        relationships:
+          type: object
+          properties:
+            balance:
+              type: object
+              description: "defines the balance that is described by converted state"
+              properties:
+                data:
+                  $ref: '#/components/schemas/BalanceKey'
+
+BalanceStateAttributeAmounts:
+  type: object
+  required:
+    - available
+    - locked
+  properties:
+    available:
+      type: string
+      description: "Available amount"
+      example: "123.000123"
+      format: Amount
+    locked:
+      type: string
+      description: "Locked amount"
+      example: "221.092100"
+      format: Amount

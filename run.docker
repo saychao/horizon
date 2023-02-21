@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -ea
+
+CONFIG=$1
+BIN=./binary
+. $CONFIG
+$BIN "${@:2}"

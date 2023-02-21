@@ -1,0 +1,66 @@
+AssetPairKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      description: "string of the `BASE:QUOTE` form"
+      example: "BTC:ETH"
+    type:
+      type: string
+      enum:
+        - "asset-pairs"
+
+AssetPair:
+  allOf:
+  - $ref: '#/components/schemas/AssetPairKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          base_asset:
+            type: object
+            description: "defines the base asset of an asset pair"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          quote_asset:
+            type: object
+            description: "defines the quote asset of an asset pair"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+      attributes:
+        type: object
+        required: [
+          price,
+          policies,
+          max_price_step,
+          physical_price_correction
+        ]
+        properties:
+          price:
+            type: string
+            example: "3.000000"
+            format: Amount
+            description: "defines an asset pair price as quote asset divided by base asset (i.e., amount of quote asset per 1 base asset)"
+          policies:
+            format: xdr.AssetPairPolicy
+            decription: "Bit mask whose bits defines asset pair properties "
+            allOf:
+            - $ref: '#/components/schemas/Mask'
+          max_price_step:
+            type: string
+            format: Amount
+            example: "1.000000"
+            description: "defines the maximal allowed price change on offer matching"
+          physical_price_correction:
+            type: string
+            format: Amount
+            example: "2.000000"
+            description: "minimum value for which the pair can be traded"
+

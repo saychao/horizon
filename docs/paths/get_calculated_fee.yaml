@@ -1,0 +1,66 @@
+/v3/accounts/{id}/calculated_fees:
+  get:
+    tags:
+      - Fees
+      - Accounts
+    summary: Calculate fee
+    description: |
+                  Allows calculating a fee for an account.
+    operationId: getCalculatedFee
+    parameters:
+    - name: asset
+      in: path
+      description: Unique identifier of an asset
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: fee_type
+      in: path
+      description: Type of fee
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+    - name: subtype
+      in: path
+      description: Subtype of fee
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+    - name: amount
+      in: path
+      description: Amount to calculate on which fee is based on
+      required: true
+      style: simple
+      explode: false
+      format: Amount
+      schema:
+        type: string
+    responses:
+      200:
+        description: fee does exist and is calculated successfuly 
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data: 
+                  type: object
+                  $ref: '#/components/schemas/CalculatedFee'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      500:
+        description: internal error occured during the request processing
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

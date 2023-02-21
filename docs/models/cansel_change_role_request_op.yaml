@@ -1,0 +1,14 @@
+CancelChangeRoleRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+      - "operations-cancel-change-role-request"
+
+CancelChangeRoleRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CancelChangeRoleRequestOpKey'

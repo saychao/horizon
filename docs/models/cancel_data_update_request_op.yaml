@@ -1,0 +1,22 @@
+CancelDataUpdateRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-cancel-data-update-request"
+
+CancelDataUpdateRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CancelDataUpdateRequestOpKey'
+  - type: object
+    required: [ relationships ]
+    properties:
+      relationships:
+        type: object
+        properties:
+          request:
+            $ref: '#/components/schemas/RequestKey'

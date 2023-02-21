@@ -1,0 +1,218 @@
+/v3/sales:
+  get:
+    tags:
+      - Crowd Investing
+    summary: Sale List
+    description: |
+                  Allows getting a filtered list of `Sale` with corresponding details.
+    operationId: getSales
+    parameters:
+    - name: filter[owner]
+      in: query
+      description: |
+                    Filters sales by a specified owner's account address.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+    - name: filter[min_start_time]
+      in: query
+      description: |
+                    Filters sales by a specified minimum start time of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: "date-time"
+        example: "2012-10-30T22:08:41+00:00"
+    - name: filter[min_end_time]
+      in: query
+      description: |
+                    Filters sales by a specified minimum end time of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: "date-time"
+        example: "2012-10-30T22:08:41+00:00"
+    - name: filter[max_start_time]
+      in: query
+      description: |
+                    Filters sales by a specified maximal start time of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: "date-time"
+        example: "2012-10-30T22:08:41+00:00"
+    - name: filter[max_end_time]
+      in: query
+      description: |
+                    Filters sales by a specified maximal end time of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: "date-time"
+        example: "2012-10-30T22:08:41+00:00"
+    - name: filter[state]
+      in: query
+      description: |
+                    Filters sales by a specified sale state.
+                    Available sale states:
+                    * 1 - open
+                    * 2 - closed
+                    * 3 - cancelled
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer
+        example: 1
+    - name: filter[max_soft_cap]
+      in: query
+      description: |
+                    Filters sales by specified maximum soft cap of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: number
+        format: float
+        example: "1.000000"
+    - name: filter[max_hard_cap]
+      in: query
+      description: |
+                    Filters sales by specified maximum hard cap of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: number
+        format: float
+        example: "3.000000"
+    - name: filter[min_soft_cap]
+      in: query
+      description: |
+                    Filters sales by specified minimum soft cap of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: number
+        format: float
+        example: "1.000000"
+    - name: filter[min_hard_cap]
+      in: query
+      description: |
+                     Filters sales by specified minimum hard cap of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: number
+        format: float
+        example: "3.000000"
+    - name: filter[base_asset]
+      in: query
+      description: |
+                    Filters sales by a specified base asset of the sale.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        example: "BTC36174"
+    - name: filter[asset_type]
+      in: query
+      description: |
+        Filters sales by an asset type.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer
+        example: 1
+    - name: filter[sale_type]
+      in: query
+      description: |
+                    Filters sales by a specified sale type.
+                    Available sale types:
+                    * 1 - basic sale
+                    * 2 - crowdfunding sale
+                    * 3 - fixed price sale
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer # todo provide a list of sale types
+        example: 1
+    - name: filter[company_id]
+      in: query
+      description: |
+        Filters sales by company ID
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: integer
+        example: 1
+    - name: include
+      in: query
+      description: |
+        Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - base_asset
+          - quote_assets
+          - default_quote_asset
+    - $ref: '#/components/schemas/pageNumberParam'
+    - $ref: '#/components/schemas/pageLimitParam'
+    - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: sale exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/Sale'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Asset'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/sales?include=default_quote_asset&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/sales?include=default_quote_asset&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

@@ -1,0 +1,26 @@
+CancelAtomicSwapAskOpKey:
+  type: object
+  properties:
+    id:
+      deprecated: true
+      type: string
+      example: "123"
+    type:
+      deprecated: true
+      type: string
+      enum:
+        - "operations-cancel-atomic-swap-ask"
+
+
+CancelAtomicSwapAskOp:
+  allOf:
+  - $ref: '#/components/schemas/CancelAtomicSwapAskOpKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          ask:
+            type: object
+            $ref: '#/components/schemas/AtomicSwapAskKey'

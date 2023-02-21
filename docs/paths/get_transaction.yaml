@@ -1,0 +1,63 @@
+/v3/transactions/{id}:
+  get:
+    tags:
+      - History
+    summary: Get transaction
+    description: |
+      Allows to get transaction by ID or Hash\n
+      🔒 Admin account's signature is required.\n
+    operationId: getTransaction
+    parameters:
+      - name: id
+        in: path
+        description: |
+          ID or Hash of the transaction
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: |
+          Relationships may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - "ledger_entry_changes"
+    responses:
+      200:
+        description: transaction exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Transaction'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LedgerEntryChange'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: such transaction does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

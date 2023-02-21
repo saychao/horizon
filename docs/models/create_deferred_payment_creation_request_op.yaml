@@ -1,0 +1,43 @@
+CreateDeferredPaymentCreationRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-deferred-payment-creation-request"
+
+
+CreateDeferredPaymentCreationRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CreateDeferredPaymentCreationRequestOpKey'
+    - type: object
+      required: [ relationships, attributes ]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              type: object
+              $ref: '#/components/schemas/RequestKey'
+            source_balance:
+              type: object
+              $ref: '#/components/schemas/BalanceKey'
+            destination_account:
+              type: object
+              $ref: '#/components/schemas/AccountKey'
+        attributes:
+          type: object
+          required:
+            - amount
+            - creator_details
+          properties:
+            amount:
+              type: string
+              format: Amount
+              example: "123.123456"
+            creator_details:
+              $ref: '#/components/schemas/Details'
+

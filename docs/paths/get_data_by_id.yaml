@@ -1,0 +1,41 @@
+/v3/data/{id}:
+  get:
+    tags:
+      - Data
+    summary: Data By ID
+    description: |
+      Allows getting `Data` resource by ID.
+    parameters:
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - owner
+    responses:
+      200:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  $ref: '#/components/schemas/Data'
+                included:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccountKey'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

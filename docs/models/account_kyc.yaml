@@ -1,0 +1,26 @@
+AccountKYCKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      type:
+        type: string
+        enum: 
+          - "account-kyc"
+AccountKYC:
+  allOf:
+  - $ref: '#/components/schemas/AccountKYCKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required: [kyc_data]
+        properties:
+          kyc_data:
+            $ref: '#/components/schemas/Details'
+            description: "free-form object containing kyc data"

@@ -1,0 +1,27 @@
+/v3/info:
+  get:
+    tags:
+    - Info
+    summary: Horizon info
+    description: |
+                  Allows getting basic info about horizon state and it's dependensies
+    operationId: getInfoV3
+    responses:
+      200:
+        description: succesfully retrieved state
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/HorizonState'
+      503:
+        description: server overloaded
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+
+
+
+
+

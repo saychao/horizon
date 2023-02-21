@@ -1,0 +1,135 @@
+/v3/history:
+  get:
+    tags:
+      - History
+    summary: Get history
+    description: |
+      Allows to get a filtered list of participants effects
+    operationId: getHistory
+    parameters:
+      - name: filter[effect]
+        in: query
+        description: |
+          Filter by effect type
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[account]
+        in: query
+        description: |
+          Filters history by participant account address
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[balance]
+        in: query
+        description: |
+          Filters history by participant's balance
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[asset]
+        in: query
+        description: |
+          Filters history by involved asset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: filter[operation.ledger_close_time_from]
+        in: query
+        description: |
+          Filter history by operation which `ledger_close_time`
+          is after given time, including given time (>=)
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          description: RFC3339 datetime
+          format: date-time
+          example: "2006-01-02T15:04:05Z"
+      - name: filter[operation.ledger_close_time_to]
+        in: query
+        description: |
+          Filter history by operation which `ledger_close_time`
+          is before given time
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          description: RFC3339 datetime
+          format: date-time
+          example: "2006-01-02T15:04:05Z"
+      - name: include
+        in: query
+        description: |
+          Relationships may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - "effect"
+            - "operation"
+            - "operation.details"
+            - "asset"
+      - $ref: '#/components/schemas/pageNumberParam'
+      - $ref: '#/components/schemas/pageLimitParam'
+      - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: history exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ParticipantsEffect'
+                included:
+                  type: array
+                  items:
+                    oneOf:
+                    - $ref: '#/components/schemas/Operation'
+                    - $ref: '#/components/schemas/OperationDetails'
+                    - $ref: '#/components/schemas/Effect'
+                    - $ref: '#/components/schemas/Asset'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/history?include=operation.details&page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/history?include=operation.details&page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: effects do not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

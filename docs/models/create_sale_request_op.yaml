@@ -1,0 +1,61 @@
+CreateSaleRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-sale-request"
+
+CreateSaleRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/CreateSaleRequestOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          base_asset:
+            $ref: '#/components/schemas/AssetKey'
+          default_quote_asset:
+            $ref: '#/components/schemas/AssetKey'
+          quote_assets:
+            type: array
+            items:
+              $ref: '#/components/schemas/AssetKey'
+          request:
+            $ref: '#/components/schemas/RequestKey'
+      attributes:
+        type: object
+        required:
+          - start_time
+          - end_time
+          - soft_cap
+          - hard_cap
+          - creator_details
+        properties:
+          soft_cap:
+            type: string
+            format: Amount
+            example: "123.123456"
+            description: "Minimal amount in base asset for sale to reach to be considered successful"
+          hard_cap:
+            type: string
+            format: Amount
+            example: "123.123456"
+            description: "Maximal amount in base asset to be sold on sale"
+          start_time:
+            type: string
+            description: "Start time of the sale"
+            format: "date-time"
+            example: "2012-11-01T22:08:41+00:00"
+          end_time:
+            type: string
+            description: "End time of the sale"
+            format: "date-time"
+            example: "2012-11-01T22:08:41+00:00"
+          creator_details:
+            $ref: '#/components/schemas/Details'

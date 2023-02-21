@@ -1,0 +1,88 @@
+HorizonStateKey:
+  type: object
+  required:
+      - id
+      - type
+  properties:
+      id:
+        type: string
+        example: "2019-03-04T18:42:15Z"
+      type:
+        type: string
+        enum: 
+        - "horizon-state"
+LedgerInfo:
+  type: object
+  required: [latest, oldest_on_start, last_ledger_increase_time]
+  properties:
+    latest:
+      type: integer
+      format: uint64
+      description: "latest known ledger"
+      example: 134
+    oldest_on_start:
+        type: integer
+        format: uint64
+        description: "sequence of oldest ledger available"
+        example: 12
+    last_ledger_increase_time:
+        type: string
+        format: date-time
+        description: "time at which latest known ledger has been increased last time"
+        example: "2019-03-04T18:42:15Z"
+HorizonState:
+  allOf:
+  - $ref: '#/components/schemas/HorizonStateKey'
+  - type: object
+    required: [attributes]
+    properties:
+      attributes:
+        type: object
+        required: [core, history, history_v2, network_passphrase, master_account_id, environment_name,tx_expiration_period, current_time, current_time_unix, precision, xdr_revision, core_version]
+        properties:
+          core:
+            $ref: '#/components/schemas/LedgerInfo'
+            description: "Ledger Info for Core"
+          history:
+            $ref: '#/components/schemas/LedgerInfo'
+            description: "Ledger Info for Ingest v1"
+          history_v2:
+            $ref: '#/components/schemas/LedgerInfo'
+            description: "Ledger Info for Ingest v2"
+          network_passphrase:
+            type: string
+            description: "TokenD network identificator. Shows in which network horizon is working."
+            example: "TokenD REIT Network!"
+          master_account_id:
+            type: string
+            description: "Defines public account id of the master account for this network. All admins are signers of this account"
+            example: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
+          environment_name:
+            type: string
+            description: "Defines user friendly name of the network"
+            example: "REIT"
+          tx_expiration_period:
+            type: integer
+            format: int64
+            description: "Defines max allowed duration between timeBounds.maxTime & close time"
+          current_time:
+            type: string
+            format: date-time
+            description: "current horizon time"
+            example: "2019-03-04T18:42:15Z"
+          current_time_unix:
+            type: integer
+            format: int64
+            description: "current horizon time in unix timestamp"
+          precision:
+            type: integer
+            description: "default asset precision in system"
+            format: int64
+            example: 6
+          xdr_revision:
+            type: string
+            example: "7e0659466026577a3ea90ff178773fecc4a85dec"
+            description: "revision of xdr used by Horizon"
+          core_version:
+            type: string
+            description: "version of the TokenD core to which this horizon is connected"

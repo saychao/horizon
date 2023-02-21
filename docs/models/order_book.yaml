@@ -1,0 +1,51 @@
+OrderBookKey:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      example: "BTC:ETH:0"
+    type:
+      type: string
+      enum:
+        - "order-books"
+
+OrderBook:
+  allOf:
+  - $ref: '#/components/schemas/OrderBookKey'
+  - type: object
+    required: [relationships]
+    properties:
+      relationships:
+        type: object
+        properties:
+          base_asset:
+            type: object
+            description: "defines base asset of order book"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          quote_asset:
+            type: object
+            description: "defines quote asset of order book"
+            properties:
+              data:
+                $ref: '#/components/schemas/AssetKey'
+          buy_entries:
+            type: object
+            description: "buy entries of the order book entry"
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderBookEntryKey'
+          sell_entries:
+            type: object
+            description: "sell entries of the order book entry"
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderBookEntryKey'

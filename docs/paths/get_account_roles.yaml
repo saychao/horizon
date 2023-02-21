@@ -1,0 +1,50 @@
+/v3/account_roles:
+  get:
+    tags:
+      - Account Roles
+    summary: Account Role List
+    description: |
+                  Allows getting a list of `Account Role` with corresponding details.
+    operationId: getAccountRoles
+    parameters:
+    - name: include
+      in: query
+      description: |
+        Relationships that may be used for the included parameter.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum: [rules]
+    - $ref: '#/components/schemas/pageNumberParam'
+    - $ref: '#/components/schemas/pageLimitParam'
+    - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: succesfully retrieved page
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+                - included
+              properties:
+                data: 
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/AccountRole'
+                included:
+                  type: array
+                  items:
+                    type: object
+                    oneOf:
+                    - $ref: '#/components/schemas/AccountRule'
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

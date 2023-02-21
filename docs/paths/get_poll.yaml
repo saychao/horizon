@@ -1,0 +1,61 @@
+/v3/polls/{id}:
+  get:
+    tags:
+      - Polls
+    summary: Poll by ID
+    description: |
+      Allows getting `Poll` with corresponding details.\n
+      🔒 Admin, poll result provider or poll owner signature is required if `outcome` should be included.\n
+    operationId: getPoll
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier of a poll
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: include
+        in: query
+        description: |
+          Relationships that may be used for the included parameter.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: [participation, participation.votes]
+    responses:
+      200:
+        description: poll exists
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  $ref: '#/components/schemas/Poll'
+                included:
+                  type: array
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      401:
+        description: either an invalid signature has been provided or a signer has not been authorized to access specified resources
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'
+      404:
+        description: poll does not exist
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

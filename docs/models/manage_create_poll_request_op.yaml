@@ -1,0 +1,90 @@
+ManageCreatePollRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "2213832742"
+    type:
+      type: string
+      enum:
+        - "operations-manage-create-poll-request"
+
+ManageCreatePollRequestOp:
+  allOf:
+  - $ref: '#/components/schemas/ManageCreatePollRequestOpKey'
+  - type: object
+    properties:
+      relationships:
+        type: object
+        nullable: true
+        properties:
+          request:
+            $ref: '#/components/schemas/RequestKey'
+          result_provider:
+            $ref: '#/components/schemas/AccountKey'
+      attributes:
+        type: object
+        required: [action]
+        properties:
+          action:
+            format: xdr.ManageCreatePollRequestAction
+            description: |
+              * 0 - create
+              * 1 - cancel
+            allOf:
+              - $ref: '#/components/schemas/Enum'
+          create:
+            $ref: '#/components/schemas/CreatePollRequestOp'
+
+
+
+CreatePollRequestOp:
+  type: object
+  required:
+  - permission_type
+  - number_of_choices
+  - creator_details
+  - start_time
+  - end_time
+  - result_provider_id
+  - vote_confirmation_required
+  - poll_data
+  properties:
+    permission_type:
+      type: int
+      format: uint64
+      example: 4
+      description: "is used to restrict using of poll through rules"
+    number_of_choices:
+      type: integer
+      format: uint64
+      example: 2
+      description: "count of allowed choices"
+    start_time:
+      type: string
+      format: date-time
+      example: "2012-11-01T22:08:41Z"
+      description: "the date from which voting in the poll will be allowed"
+    end_time:
+      type: string
+      format: date-time
+      example: "2012-11-01T22:08:41Z"
+      description: "the date until which voting in the poll will be allowed"
+    result_provider_id:
+      type: string
+      example: "GBSR6JG5AYSAW7HK6EGJFYVIVN54LVGSY3ZLJ6X3IBQZ766EJABCZQTH"
+      description: "id of account who could close the poll"
+    vote_confirmation_required:
+      type: boolean
+      example: true
+      description: "defines if result provider signature is required to participate in poll voting"
+    poll_data:
+      $ref: '#/components/schemas/PollData'
+    creator_details:
+      $ref: '#/components/schemas/Details'
+    all_tasks:
+      type: integer
+      format: uint32
+      description: tasks set on request creation
+      example: 2
+      nullable: true

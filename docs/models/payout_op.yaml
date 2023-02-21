@@ -1,0 +1,71 @@
+PayoutOpKey:
+  type: object
+  properties:
+    id:
+      deprecated: true
+      type: string
+      example: "123"
+    type:
+      deprecated: true
+      type: string
+      enum:
+        - "operations-payout"
+
+PayoutOp:
+  allOf:
+  - $ref: '#/components/schemas/PayoutOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        deprecated: true
+        properties:
+          source_account:
+            deprecated: true
+            $ref: '#/components/schemas/AccountKey'
+          source_balance:
+            deprecated: true
+            $ref: '#/components/schemas/BalanceKey'
+          asset:
+            deprecated: true
+            $ref: '#/components/schemas/AssetKey'
+      attributes:
+        type: object
+        deprecated: true
+        required:
+          - max_payout_amount
+          - min_payout_amount
+          - min_asset_holder_amount
+          - expected_fee
+          - actual_fee
+          - actual_payout_amount
+        properties:
+          expected_fee:
+            deprecated: true
+            allOf:
+            - $ref: '#/components/schemas/Fee'
+          actual_fee:
+            deprecated: true
+            allOf:
+            - $ref: '#/components/schemas/Fee'
+          #TODO add description for amounts
+          min_payout_amount:
+            type: string
+            format: Amount
+            example: "123.123456"
+          max_payout_amount:
+            deprecated: true
+            type: string
+            format: Amount
+            example: "123.123456"
+          min_asset_holder_amount:
+            deprecated: true
+            type: string
+            format: Amount
+            example: "123.123456"
+          actual_payout_amount:
+            deprecated: true
+            type: string
+            format: Amount
+            example: "123.123456"

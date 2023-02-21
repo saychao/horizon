@@ -1,0 +1,35 @@
+CheckSaleStateOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-check-sale-state"
+
+CheckSaleStateOp:
+  allOf:
+  - $ref: '#/components/schemas/CheckSaleStateOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          sale:
+            $ref: '#/components/schemas/SaleKey'
+      attributes:
+        type: object
+        required:
+          - effect
+        properties:
+          effect:
+            format: xdr.CheckSaleStateEffect
+            description: |
+                * 1: "canceled"
+                * 2: "closed"
+                * 3: "updated"
+            allOf:
+              - $ref: '#/components/schemas/Enum'

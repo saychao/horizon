@@ -1,0 +1,45 @@
+/v3/account_rules:
+  get:
+    tags:
+      - Account Rules
+    summary: Account Rule List
+    description: |
+                  Allows getting a list of `Account Rule` with corresponding details.
+    operationId: getAccountRules
+    parameters:
+    - $ref: '#/components/schemas/pageNumberParam'
+    - $ref: '#/components/schemas/pageLimitParam'
+    - $ref: '#/components/schemas/sortingParam'
+    responses:
+      200:
+        description: succesfully retrieved page
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data: 
+                  type: array
+                  items:
+                    type: object
+                    $ref: '#/components/schemas/AccountRule'
+                links:
+                  type: object
+                  description: "Provides links for pagination"
+                  properties:
+                    next:
+                      type: string
+                      description: "link to the next page"
+                      example: "/v3/account_rules?page[number]=2&page[limit]=15"
+                    self:
+                      type: string
+                      description: "link to the current page"
+                      example: "/v3/account_rules?page[number]=1&page[limit]=15"
+      400:
+        description: bad input parameter
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Errors'

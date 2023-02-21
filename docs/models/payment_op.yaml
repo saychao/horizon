@@ -1,0 +1,60 @@
+PaymentOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-payment"
+
+PaymentOp:
+  allOf:
+  - $ref: '#/components/schemas/PaymentOpKey'
+  - type: object
+    required: [relationships, attributes]
+    properties:
+      relationships:
+        type: object
+        properties:
+          account_from:
+            $ref: '#/components/schemas/AccountKey'
+          account_to:
+            $ref: '#/components/schemas/AccountKey'
+          balance_from:
+            $ref: '#/components/schemas/BalanceKey'
+          balance_to:
+            $ref: '#/components/schemas/BalanceKey'
+          asset:
+            $ref: '#/components/schemas/AssetKey'
+
+      attributes:
+        type: object
+        required:
+          - amount
+          - source_fee
+          - destination_fee
+          - source_pay_for_destination
+          - subject
+          - reference
+        properties:
+          source_fee:
+            $ref: '#/components/schemas/Fee'
+          destination_fee:
+            $ref: '#/components/schemas/Fee'
+          source_pay_for_destination:
+            type: boolean
+            example: false
+            description: "Whether source of the payment should pay destination fee"
+          amount:
+            type: string
+            format: Amount
+            example: "123.123456"
+          reference:
+            type: string
+            description: "Reference for the payment"
+          subject:
+            type: string
+            example: "Dividents"
+            description: "Subject of the payment"

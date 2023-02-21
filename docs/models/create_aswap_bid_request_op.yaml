@@ -1,0 +1,39 @@
+CreateAtomicSwapBidRequestOpKey:
+  type: object
+  properties:
+    id:
+      type: string
+      example: "123"
+    type:
+      type: string
+      enum:
+        - "operations-create-atomic-swap-bid-request"
+
+
+CreateAtomicSwapBidRequestOp:
+  allOf:
+    - $ref: '#/components/schemas/CreateAtomicSwapBidRequestOpKey'
+    - type: object
+      required: [relationships, attributes]
+      properties:
+        relationships:
+          type: object
+          properties:
+            request:
+              type: object
+              $ref: '#/components/schemas/RequestKey'
+            quote_asset:
+              $ref: '#/components/schemas/AssetKey'
+            ask:
+              $ref: '#/components/schemas/AtomicSwapAskKey'
+        attributes:
+          type: object
+          required:
+            - base_amount
+            - creator_details
+          properties:
+            base_amount:
+              type: string
+              format: Amount
+            creator_details:
+                $ref: '#/components/schemas/Details'
