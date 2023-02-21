@@ -5,7 +5,7 @@ RUN apk add --no-cache git build-base
 
 ARG version="dirty"
 
-WORKDIR /go/src/github.com/SafeRE-IT/horizon
+WORKDIR /go/src/github.com/saychao/horizon
 COPY . .
 
 RUN go mod download
